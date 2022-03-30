@@ -41,6 +41,26 @@ $(document).ready( function(){
             })
 
     }
+        $('#search-movie').on('submit', (e) => {
+            let searchTitle = $('#search-title').val();
+            console.log(searchTitle)
+            // getMovies(searchTitle);
+            e.preventDefault();
+        });
+    // function getMovies(searchTitle) {
+    //     fetch("https://grey-yellow-bonnet.glitch.me/movies" + searchTitle)
+    //         .then((response) => {
+    //             console.log(response);
+    //             let movies = response.movieData; //Change
+    //             let output = '';
+    //             $.each(movies, (index, movie) => {
+    //                 output += `<h3>${movie.Title}</h3>`;
+    //             });
+    //             $(``);
+    //         })
+    // }
+
+
     movieArray();
 
     /*
@@ -52,24 +72,26 @@ $(document).ready( function(){
     }
     searchMovies(m);
     */
-    
-    function addMovie() {
-        console.log("button was clicked")
-        let title = document.getElementById("add-title").value
-        let rating = document.getElementById("add-rating").value
-        console.log(title)
-        console.log(rating)
+    // let movieTitle = document.getElementById("add-title").value
+    // let rating = document.getElementById("add-rating").value
 
-    }
+    // function addMovie() {
+    //     console.log(title)
+    //     console.log(rating)
+    //
+    // }
+
 
 
     document.getElementById("add-movie-button").addEventListener('click', function(){
-            addMovie()
+            addMovieTest()
     })
 
-
+function addMovieTest () {
+    let movieTitle = document.getElementById("add-title").value
+    let rating = document.getElementById("add-rating").value
     // Add a movie
-    const movie = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
+    const movie = {title: movieTitle, body: rating};
     // const url = '/posts';
     let options = {
         method: 'POST',
@@ -81,7 +103,7 @@ $(document).ready( function(){
     console.log(movie)
     fetch(movieUrl, options)
         .then(response => console.log(response))
-
+}
 
 // //    Delete a movie
 //
