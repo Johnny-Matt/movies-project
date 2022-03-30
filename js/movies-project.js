@@ -52,4 +52,66 @@ $(document).ready( function(){
     }
     searchMovies(m);
     */
+    
+    function addMovie() {
+        console.log("button was clicked")
+        let title = document.getElementById("add-title").value
+        let rating = document.getElementById("add-rating").value
+        console.log(title)
+        console.log(rating)
+
+    }
+
+
+    document.getElementById("add-movie-button").addEventListener('click', function(){
+            addMovie()
+    })
+
+
+    // Add a movie
+    const movie = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
+    // const url = '/posts';
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie),
+    };
+    console.log(movie)
+    fetch(movieUrl, options)
+        .then(response => console.log(response))
+
+
+// //    Delete a movie
+//
+//     const movie, id = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
+//     // const url = '/posts';
+//     options = {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(movie),
+//     };
+//     console.log(movie)
+//     fetch(`movieUrl${id}`, options)
+//         .then(response => console.log(response))
+//    
+// //    Edit a movie
+//
+//     const movie, id = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
+//     options = {
+//         method: 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(movie),
+//     };
+//     console.log(movie)
+//     fetch(`movieUrl${id}`, options)
+//         .then(response => console.log(response))
+//
+
+
 })
