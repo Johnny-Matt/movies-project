@@ -114,7 +114,6 @@ $(document).ready(function () {
                 getMoviesById(movieData);
 
 
-
             })}
 
     movieArray()
@@ -156,6 +155,43 @@ function getMoviesById(movIndex) {
         }
         html += '</div>';
         return html;
+    }
+    //-----------------Builds/Populates the actual movie card--------------
+
+    function buildMovieCard(movie) {
+        let html = ""
+        let movieDetails = extractMovieData(movie);
+
+
+
+
+        //language=HTML
+        html += `
+      
+        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+            
+            <div id="${movieDetails.id}" class="card border-5 px-0">
+                <p>Movie Title:</p>
+                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
+                <p>Director:</p>
+                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
+                <p>Year:</p>
+                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
+                <p>Genre:</p>
+                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
+                <p>Actors:</p>
+                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
+                
+<!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
+                <button type="button" class="delete-button">Delete</button>
+                <button id="edit-button">Edit</button>
+               
+                
+            </div>
+        </section>`
+        return html
+
+
     }
 
     // ---------------Button and input search functionality-----------------------
@@ -202,36 +238,73 @@ function getMoviesById(movIndex) {
     // -------------------------Delete A Movie Function-----------------------------
    // whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
 
-    document.getElementById("delete-button").addEventListener('click', function () {
-        deleteMovie(257);
-        console.log("button was clicked");
+    // document.getElementsByClassName("delete-button").addEventListener('click', function () {
+    //     deleteMovie(257);
+    //     console.log("button was clicked");
+    //
+    // })
 
+    //------------------------Possible solution to delete button-----------------
+    // const deleteOptions = {
+    //     method: 'DELETE',
+    //     headers: {    'Content-Type': 'application/json'    }
+    // }
+    // for(let movieDetails of movieData) {
+    //     $(`#delete-btn${movieDetails.id}`).click(function () {
+    //         $(`#delete-btn${movieDetails.id}`).attr('disabled')
+    //         let userDelete = confirm(`Are you sure you want to delete ${movieDetails.title}?`)
+    //         // DELETE FETCH
+    //         if (userDelete) {
+    //             fetch(`${movieUrl}/${movieDetails.id}`, deleteOptions)
+    //                 .then(res => res.json())
+    //                 .then(movieData => console.log(movieData))
+    //                 .then(fetchData(2000))
+    //                 .then($(`#delete-btn${movieDetails.id}`).removeAttr('disabled'))
+    //                 .catch(error => console.error(error))
+    //         } else {
+    //             $(`#delete-btn${movieDetails.id}`).removeAttr('disabled')
+    //         }
+    //     })
+    // }
+
+
+    // var delBtn = document.getElementsByClassName("delete-button")
+    //
+    // addEventListener('click', function () {
+    //     deleteMovie(272)
+    //     console.log("delete button was click");
+    // })
+
+    $(document).on("click","button.delete-button", function (e){
+        let deleteMovieId = $(this).parent("div").attr("id");
+        let options = {
+            method: 'DELETE'
+        };
+        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
+            .then(response => console.log(response))
+        console.log(deleteMovieId)
     })
 
     document.getElementById("edit-button").addEventListener('click', function () {
         editMovie(1);
         console.log("button click");
     })
-       //TODO add param to associated each Delete Button with whatever movie ID like example "281" below
 
 
-       // e.preventDefault();
 
-    //movieId just a placeholder parameter for function
-    function deleteMovie(movieId) {
-        let movie = {title: movieTitle, body: movieRating};
-        let id = movieId;
-        let options = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movie),
-        };
-        console.log(movie)
-        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${id}`, options)
-            .then(response => console.log(response))
-    }
+    // //movieId just a placeholder parameter for function
+    // function deleteMovie(movieId) {
+    //     // let movieDetails = extractMovieData(movieId)
+    //     // let movie = {title: movieDetails.title, body: movieDetails.rating};
+    //     let deleteMovieId = $(this).parent("div").attr("id");
+    //     console.log(deleteMovieId)
+    //     let id = movieId;
+    //     let options = {
+    //         method: 'DELETE'
+    //     };
+    //     fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
+    //         .then(response => console.log(response))
+    // }
 
     // Edit Movie()
     function editMovie(id, title, year, rating) {
@@ -272,38 +345,6 @@ function getMoviesById(movIndex) {
 
 
 
-    //-----------------Builds/Populates the actual movie card--------------
 
-    function buildMovieCard(movie) {
-        let html = ""
-        let movieDetails = extractMovieData(movie);
-
-        //language=HTML
-        html += `
-      
-        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
-            
-            <div id="movie-info-card" class="card border-5 px-0">
-                <p>Movie Title:</p>
-                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
-                <p>Director:</p>
-                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
-                <p>Year:</p>
-                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
-                <p>Genre:</p>
-                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
-                <p>Actors:</p>
-                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
-<!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
-                <button id="delete-button">Delete</button>
-                <button id="edit-button">Edit</button>
-               
-                
-            </div>
-        </section>`
-        return html
-
-
-    }
 
 })
