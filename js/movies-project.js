@@ -26,73 +26,6 @@ $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
 
-//     function movieArray() {
-//         fetch(movieUrl)
-//             .then(response => {
-//                 console.log('response, woo')
-//                 return response.json();
-//             })
-//             .then(movieData => {
-//                 //document.querySelector(".preload").style.display = "none"; //stop the load
-//                 console.log(movieData);
-//
-// // ---------------Button and input search functionality
-// //                 $('#search-movie').on('click', (e) => {
-// //                     let searchTitle = $('#search-title').val();
-// //                     console.log(searchTitle)
-// //                     getMovies(searchTitle);
-// //                     e.preventDefault();
-// //                 });
-//
-//
-//
-//                 // Be able to search all movies with title/ display
-//                 function getMovies(searchTitle) {
-//                     fetch("https://grey-yellow-bonnet.glitch.me/movies/")
-//                         .then((response) => {
-//                             console.log(response);
-//
-//                             let mainContainer = document.getElementById("container");
-//                             mainContainer.innerHTML = "";
-//                             for (let i = 0; i < movieData.length; i++) {
-//                                 console.log(movieData[i].title);
-//                                 let movieTitleCall = (movieData[i]);
-//
-//                                 let d = document.createElement("div");
-//                                 d.classList.add("card", "col-4", "m-1");
-//
-//
-//                                 let dateOfWeather = document.createElement("div");
-//                                 dateOfWeather.classList.add("card-header");
-//                                 dateOfWeather.innerHTML = movieTitleCall;
-//
-//                                 // Create Div with added attributes below
-//                                 function appendingAttribute(parent, content) {
-//                                     let div = document.createElement("div");
-//                                     div.innerHTML = content;
-//                                     parent.appendChild(div);
-//                                 }
-//
-//                                 appendingAttribute(d, "Title: " + movieTitleCall.title);
-//
-//                                 mainContainer.appendChild(d);
-//
-//
-//                                 /* TODO: Print each movie
-//                                 $.each(m => { //, (index, movie)
-//                                     output += `<h3>${movieTitleCall}</h3>`;
-//                                 });
-//                                 //$(``);
-//                                  */
-//                             }
-//                         })
-//                 }
-//             })
-//
-//     }
-//
-//     movieArray();
-
     function movieArray() {
         fetch(movieUrl)
             .then(response => {
@@ -100,36 +33,30 @@ $(document).ready(function () {
                 return response.json();
             })
             .then(movieData => {
-                //document.querySelector(".preload").style.display = "none"; //stop the load
                 console.log(movieData);
 
-     // ----------------forEach that may be useful later----------------------
+                // ----------------forEach that may be useful later----------------------
 
-               // let moviesTest = movieData.forEach( function output(index){
-               //      console.log(index.id);
-               //      let movieIndex = index
-               //      return movieIndex
-               //  });
+                // let moviesTest = movieData.forEach( function output(index){
+                //      console.log(index.id);
+                //      let movieIndex = index
+                //      return movieIndex
+                //  });
                 $("#movieCard").html(buildMovieCardContent(movieData));
                 getMoviesById(movieData);
-
-
-            })}
+            })
+    }
 
     movieArray()
 
-
-
 //    Extracts movie index from fetch data.
-function getMoviesById(movIndex) {
+    function getMoviesById(movIndex) {
         movIndex.forEach(function output(index) {
-        let movieId = index.id
-        console.log(movieId)
-    })
-}
+            let movieId = index.id
+            console.log(movieId)
+        })
+    }
 
-
-    
     //------------------Obj of Extracted Movie Data---------------------
 
     function extractMovieData(movieProp) {
@@ -143,9 +70,9 @@ function getMoviesById(movIndex) {
             rating: movieProp.rating,
             poster: movieProp.poster,
             id: movieProp.id
-
         }
     }
+
     //-----------------Gathers actual card contents---------------------
 
     function buildMovieCardContent(movieArr) {
@@ -156,46 +83,79 @@ function getMoviesById(movIndex) {
         html += '</div>';
         return html;
     }
+
+    function buildMovieCardModal(modal) {
+        let html = '<div class="row">'
+        for (let i = 0; i < modal.length; i++) {
+            html += buildMovieCard(modal[i]);
+        }
+        html += '</div>';
+        return html;
+    }
+
     //-----------------Builds/Populates the actual movie card--------------
 
     function buildMovieCard(movie) {
         let html = ""
         let movieDetails = extractMovieData(movie);
 
-
-
-
         //language=HTML
         html += `
-      
-        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
-            
-            <div id="${movieDetails.id}" class="card border-5 px-0">
-                <p>Movie Title:</p>
-                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
-                <p>Director:</p>
-                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
-                <p>Year:</p>
-                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
-                <p>Genre:</p>
-                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
-                <p>Actors:</p>
-                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
-                
-<!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
-                <button type="button" class="delete-button">Delete</button>
-                <button id="edit-button">Edit</button>
-               
-                
-            </div>
-        </section>`
+
+            <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+
+                <div id="${movieDetails.id}" class="card border-5 px-0">
+                    <p>Movie Title:</p>
+                    <p><b style="color: #0fb784">${movieDetails.title}</b></p>
+                    <p>Director:</p>
+                    <p><b style="color: #0fb784">${movieDetails.director}</b></p>
+                    <p>Year:</p>
+                    <p><b style="color: #0fb784">${movieDetails.year}</b></p>
+                    <p>Genre:</p>
+                    <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
+                    <p>Actors:</p>
+                    <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
+
+                    <!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
+                    <button type="button" class="delete-button">Delete</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary edit-button" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                        Edit ${movieDetails.title}
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <input type="text" class="modal-title" id="staticBackdropLabel"
+                                           placeholder="${movieDetails.title}">
+                                    <button id="modalTitle">Submit</button>
+                                    </input>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>`
         return html
-
-
     }
 
-    // ---------------Button and input search functionality-----------------------
 
+    // ---------------Button and input search functionality-----------------------
     $('#search-movie').on('click', (e) => {
         let searchTitle = $('#search-title').val();
         console.log(searchTitle)
@@ -204,18 +164,12 @@ function getMoviesById(movIndex) {
         e.preventDefault();
     });
 
-
-
-    //-------------------Add Movie Event Listener-----------------------------------
-
+    //-------------------Add Movie Event Listener----------------------------------
     document.getElementById("add-movie-button").addEventListener('click', function () {
         addMovie()
 
     })
     // ----------------------Add A Movie Function-----------------------------------
-    // let movieTitle = document.getElementById("add-title").value
-    // let movieRating = document.getElementById("add-rating").value
-
     function addMovie() {
         let movieTitle = document.getElementById("add-title").value
         let movieRating = document.getElementById("add-rating").value
@@ -235,6 +189,44 @@ function getMoviesById(movIndex) {
             .then(response => console.log(response))
     }
 
+    $(document).on("click","button.delete-button", function (e){
+        let deleteMovieId = $(this).parent("div").attr("id");
+        let options = {
+            method: 'DELETE'
+        };
+        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
+            .then(response => console.log(response))
+            console.log(deleteMovieId)
+    })
+
+    // Edit Movie()
+    $(document).on("click", "button.edit-button", function(e) {
+
+        let editMovieId = $(this).parent("div").attr("id");
+        let movieDetails = extractMovieData(e);
+
+        let options = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                title: movieDetails.title,
+                year: movieDetails.year,
+                rating: movieDetails.rating
+            })
+        };
+        console.log(movieDetails);
+        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${editMovieId}`, options)
+            .then(response => response.json())
+            .then(data => data)
+        createModal();
+    })
+
+    //create Modal
+    function createModal() {
+        let userTitle = document.getElementById("modalTitle").value
+        console.log(userTitle);
+    }
+
+})
     // -------------------------Delete A Movie Function-----------------------------
    // whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
 
@@ -275,22 +267,10 @@ function getMoviesById(movIndex) {
     //     console.log("delete button was click");
     // })
 
-    $(document).on("click","button.delete-button", function (e){
-        let deleteMovieId = $(this).parent("div").attr("id");
-        let options = {
-            method: 'DELETE'
-        };
-        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
-            .then(response => console.log(response))
-        console.log(deleteMovieId)
-    })
-
-    document.getElementById("edit-button").addEventListener('click', function () {
-        editMovie(1);
-        console.log("button click");
-    })
-
-
+    // document.getElementById("edit-button").addEventListener('click', function () {
+    //     editMovie(1);
+    //     console.log("button click");
+    // })
 
     // //movieId just a placeholder parameter for function
     // function deleteMovie(movieId) {
@@ -305,46 +285,3 @@ function getMoviesById(movIndex) {
     //     fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
     //         .then(response => console.log(response))
     // }
-
-    // Edit Movie()
-    function editMovie(id, title, year, rating) {
-        fetch(movieUrl + ":" + id, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: title,
-                year: year,
-                rating: rating
-            })
-
-        }).then(response => response.json())
-            .then(data => data)
-
-    }
-
-    /*
-
-    // Edit a movie
-    function editMovie () {
-        let movie = {title: movieTitle, body: rating};
-        let id = '';
-        let options = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movie),
-        };
-        console.log(movie)
-        fetch(`movieUrl${id}`, options) // TODO
-            .then(response => console.log(response))
-    }
- */
-
-
-
-
-
-})
