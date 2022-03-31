@@ -283,6 +283,8 @@ function getMoviesById(movIndex) {
         fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
             .then(response => console.log(response))
         console.log(deleteMovieId)
+        movieArray()
+
     })
 
     document.getElementById("edit-button").addEventListener('click', function () {
