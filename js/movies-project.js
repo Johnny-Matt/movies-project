@@ -110,7 +110,8 @@ $(document).ready(function () {
                //      let movieIndex = index
                //      return movieIndex
                //  });
-                $("#movieCard").html(buildMovieCardContent(movieData))
+                $("#movieCard").html(buildMovieCardContent(movieData));
+                getMoviesById(movieData);
 
 
 
@@ -120,6 +121,13 @@ $(document).ready(function () {
 
 
 
+//    Extracts movie index from fetch data.
+function getMoviesById(movIndex) {
+        movIndex.forEach(function output(index) {
+        let movieId = index.id
+        console.log(movieId)
+    })
+}
 
 
     
