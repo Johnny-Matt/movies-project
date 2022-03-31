@@ -21,12 +21,79 @@ const init = () => {
 init();
 
 // Call Movie API
-$(document).ready( function(){
+$(document).ready(function () {
 
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
 
-    function movieArray () {
+//     function movieArray() {
+//         fetch(movieUrl)
+//             .then(response => {
+//                 console.log('response, woo')
+//                 return response.json();
+//             })
+//             .then(movieData => {
+//                 //document.querySelector(".preload").style.display = "none"; //stop the load
+//                 console.log(movieData);
+//
+// // ---------------Button and input search functionality
+// //                 $('#search-movie').on('click', (e) => {
+// //                     let searchTitle = $('#search-title').val();
+// //                     console.log(searchTitle)
+// //                     getMovies(searchTitle);
+// //                     e.preventDefault();
+// //                 });
+//
+//
+//
+//                 // Be able to search all movies with title/ display
+//                 function getMovies(searchTitle) {
+//                     fetch("https://grey-yellow-bonnet.glitch.me/movies/")
+//                         .then((response) => {
+//                             console.log(response);
+//
+//                             let mainContainer = document.getElementById("container");
+//                             mainContainer.innerHTML = "";
+//                             for (let i = 0; i < movieData.length; i++) {
+//                                 console.log(movieData[i].title);
+//                                 let movieTitleCall = (movieData[i]);
+//
+//                                 let d = document.createElement("div");
+//                                 d.classList.add("card", "col-4", "m-1");
+//
+//
+//                                 let dateOfWeather = document.createElement("div");
+//                                 dateOfWeather.classList.add("card-header");
+//                                 dateOfWeather.innerHTML = movieTitleCall;
+//
+//                                 // Create Div with added attributes below
+//                                 function appendingAttribute(parent, content) {
+//                                     let div = document.createElement("div");
+//                                     div.innerHTML = content;
+//                                     parent.appendChild(div);
+//                                 }
+//
+//                                 appendingAttribute(d, "Title: " + movieTitleCall.title);
+//
+//                                 mainContainer.appendChild(d);
+//
+//
+//                                 /* TODO: Print each movie
+//                                 $.each(m => { //, (index, movie)
+//                                     output += `<h3>${movieTitleCall}</h3>`;
+//                                 });
+//                                 //$(``);
+//                                  */
+//                             }
+//                         })
+//                 }
+//             })
+//
+//     }
+//
+//     movieArray();
+
+    function movieArray() {
         fetch(movieUrl)
             .then(response => {
                 console.log('response, woo')
@@ -36,78 +103,112 @@ $(document).ready( function(){
                 //document.querySelector(".preload").style.display = "none"; //stop the load
                 console.log(movieData);
 
-                // Button and input search functionality
-                $('#search-movie').on('click', (e) => {
-                    let searchTitle = $('#search-title').val();
-                    console.log(searchTitle)
-                    getMovies(searchTitle);
-                    e.preventDefault();
-                });
+     // ----------------forEach that may be useful later----------------------
 
-                // Be able to search all movies with title/ display
-                function getMovies(searchTitle) {
-                    fetch("https://grey-yellow-bonnet.glitch.me/movies/")
-                        .then((response) => {
-                            console.log(response);
-
-                            let mainContainer = document.getElementById("container");
-                            mainContainer.innerHTML = "";
-                            for (let i = 0; i < movieData.length; i++) {
-                                console.log(movieData[i].title);
-                                let movieTitleCall = (movieData[i]);
-
-                                let d = document.createElement("div");
-                                d.classList.add("card", "col-4", "m-1");
+               // let moviesTest = movieData.forEach( function output(index){
+               //      // console.log(index);
+               //      let movieIndex = index
+               //      return movieIndex
+               //  });
+                $("#movieCard").html(buildMovieCardContent(movieData))
 
 
-                                let dateOfWeather = document.createElement("div");
-                                dateOfWeather.classList.add("card-header");
-                                dateOfWeather.innerHTML = movieTitleCall;
 
-                                // Create Div with added attributes below
-                                function appendingAttribute(parent, content) {
-                                    let div = document.createElement("div");
-                                    div.innerHTML = content;
-                                    parent.appendChild(div);
-                                }
+            })}
 
-                                appendingAttribute(d, "Title: " + movieTitleCall.title);
+    movieArray()
 
-                                mainContainer.appendChild(d);
+    
+    //------------------Obj of Extracted Movie Data---------------------
 
+    function extractMovieData(movieProp) {
+        return {
+            title: movieProp.title,
+            director: movieProp.director,
+            year: movieProp.year,
+            genre: movieProp.genre,
+            actors: movieProp.actors,
+            plot: movieProp.plot,
+            rating: movieProp.rating,
+            poster: movieProp.poster,
+            id: movieProp.id
 
-                                /* TODO: Print each movie
-                                $.each(m => { //, (index, movie)
-                                    output += `<h3>${movieTitleCall}</h3>`;
-                                });
-                                //$(``);
-                                 */
-                            }
-                        })
-                }
-            })
+        }
+    }
+    //-----------------Gathers actual card contents---------------------
+
+    function buildMovieCardContent(movieArr) {
+        let html = '<div class="row">'
+        for (let i = 0; i < movieArr.length; i++) {
+            html += buildMovieCard(movieArr[i]);
+        }
+        html += '</div>';
+        return html;
+    }
+
+    //-----------------Builds/Populates the actual movie card--------------
+
+    function buildMovieCard(movie) {
+        let html = ""
+        let movieDetails = extractMovieData(movie);
+
+        //language=HTML
+        html += `
+      
+        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+            
+            <div id="movie-info-card" class="card border-5 px-0">
+                <p>Movie Title:</p>
+                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
+                <p>Director:</p>
+                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
+                <p>Year:</p>
+                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
+                <p>Genre:</p>
+                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
+                <p>Actors:</p>
+                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
+                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>
+            
+            </div>
+        </section>`
+        return html
+
 
     }
-    movieArray();
 
-    // let movieTitle = document.getElementById("add-title").value
-    // let rating = document.getElementById("add-rating").value
 
-    // function addMovie() {
-    //     console.log(title)
-    //     console.log(rating)
-    //
-    // }
 
-    document.getElementById("add-movie-button").addEventListener('click', function(){
-            addMovie()
+
+    // ---------------Button and input search functionality-----------------------
+
+    $('#search-movie').on('click', (e) => {
+        let searchTitle = $('#search-title').val();
+        console.log(searchTitle)
+       movieArray(searchTitle);
+
+        e.preventDefault();
+    });
+
+
+
+    //-------------------Add Movie Event Listener-----------------------------------
+
+    document.getElementById("add-movie-button").addEventListener('click', function () {
+        addMovie()
+
     })
-    let movieTitle = document.getElementById("add-title").value
-    let rating = document.getElementById("add-rating").value
+    // ----------------------Add A Movie Function-----------------------------------
+    // let movieTitle = document.getElementById("add-title").value
+    // let movieRating = document.getElementById("add-rating").value
 
-    // Add a movie
-    function addMovie () {
-        let movie = {title: movieTitle, body: rating};
+    function addMovie() {
+        let movieTitle = document.getElementById("add-title").value
+        let movieRating = document.getElementById("add-rating").value
+        console.log(movieTitle)
+        console.log(movieRating)
+
+        let movie = {title: movieTitle, rating: movieRating};
         let options = {
             method: 'POST',
             headers: {
@@ -119,11 +220,20 @@ $(document).ready( function(){
         fetch(movieUrl, options)
             .then(response => console.log(response))
     }
-/*
-    // Delete a movie
-    function deleteMovie () {
-        let movie = {title: movieTitle, body: rating};
-        let id = '';
+
+    // -------------------------Delete A Movie Function-----------------------------
+   // whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
+   $("#delete-button").on("click", (e) => {
+       //TODO add param to associated each Delete Button with whatever movie ID like example "281" below
+
+       deleteMovie(257)
+       e.preventDefault();
+   });
+
+    //movieId just a placeholder parameter for function
+    function deleteMovie(movieId) {
+        let movie = {title: movieTitle, body: movieRating};
+        let id = movieId;
         let options = {
             method: 'DELETE',
             headers: {
@@ -132,9 +242,12 @@ $(document).ready( function(){
             body: JSON.stringify(movie),
         };
         console.log(movie)
-        fetch(`'https://grey-yellow-bonnet.glitch.me/movies/' + ${id}`, options) // TODO
+        fetch(`https://grey-yellow-bonnet.glitch.me/movies/${id}`, options)
             .then(response => console.log(response))
     }
+
+
+    /*
 
     // Edit a movie
     function editMovie () {
