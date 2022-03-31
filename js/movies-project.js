@@ -151,7 +151,6 @@ function getMoviesById(movIndex) {
 
     function buildMovieCardContent(movieArr) {
         let html = '<div class="row">'
-        console.log("build movie content")
         for (let i = 0; i < movieArr.length; i++) {
             html += buildMovieCard(movieArr[i]);
         }
@@ -203,11 +202,16 @@ function getMoviesById(movIndex) {
     // -------------------------Delete A Movie Function-----------------------------
    // whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
 
-    // document.getElementById("delete-button").addEventListener('click', function () {
-    //     deleteMovie(257)
-    //     console.log("button was clicked")
-    //
-    // })
+    document.getElementById("delete-button").addEventListener('click', function () {
+        deleteMovie(257);
+        console.log("button was clicked");
+
+    })
+
+    document.getElementById("edit-button").addEventListener('click', function () {
+        editMovie(1);
+        console.log("button click");
+    })
        //TODO add param to associated each Delete Button with whatever movie ID like example "281" below
 
 
@@ -229,6 +233,23 @@ function getMoviesById(movIndex) {
             .then(response => console.log(response))
     }
 
+    // Edit Movie()
+    function editMovie(id, title, year, rating) {
+        fetch(movieUrl + ":" + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: title,
+                year: year,
+                rating: rating
+            })
+
+        }).then(response => response.json())
+            .then(data => data)
+
+    }
 
     /*
 
@@ -275,6 +296,7 @@ function getMoviesById(movIndex) {
                 <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
 <!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
                 <button id="delete-button">Delete</button>
+                <button id="edit-button">Edit</button>
                
                 
             </div>
