@@ -111,7 +111,6 @@ $(document).ready(function () {
                //      return movieIndex
                //  });
                 $("#movieCard").html(buildMovieCardContent(movieData))
-                console.log($("#movieCard"));
 
 
 
