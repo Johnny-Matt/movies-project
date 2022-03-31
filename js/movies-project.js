@@ -106,7 +106,7 @@ $(document).ready(function () {
      // ----------------forEach that may be useful later----------------------
 
                // let moviesTest = movieData.forEach( function output(index){
-               //      // console.log(index);
+               //      console.log(index.id);
                //      let movieIndex = index
                //      return movieIndex
                //  });
@@ -117,6 +117,10 @@ $(document).ready(function () {
             })}
 
     movieArray()
+
+
+
+
 
     
     //------------------Obj of Extracted Movie Data---------------------
@@ -145,40 +149,6 @@ $(document).ready(function () {
         html += '</div>';
         return html;
     }
-
-    //-----------------Builds/Populates the actual movie card--------------
-
-    function buildMovieCard(movie) {
-        let html = ""
-        let movieDetails = extractMovieData(movie);
-
-        //language=HTML
-        html += `
-      
-        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
-            
-            <div id="movie-info-card" class="card border-5 px-0">
-                <p>Movie Title:</p>
-                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
-                <p>Director:</p>
-                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
-                <p>Year:</p>
-                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
-                <p>Genre:</p>
-                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
-                <p>Actors:</p>
-                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
-                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>
-            
-            </div>
-        </section>`
-        return html
-
-
-    }
-
-
-
 
     // ---------------Button and input search functionality-----------------------
 
@@ -223,12 +193,16 @@ $(document).ready(function () {
 
     // -------------------------Delete A Movie Function-----------------------------
    // whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
-   $("#delete-button").on("click", (e) => {
+
+    // document.getElementById("delete-button").addEventListener('click', function () {
+    //     deleteMovie(257)
+    //     console.log("button was clicked")
+    //
+    // })
        //TODO add param to associated each Delete Button with whatever movie ID like example "281" below
 
-       deleteMovie(257)
-       e.preventDefault();
-   });
+
+       // e.preventDefault();
 
     //movieId just a placeholder parameter for function
     function deleteMovie(movieId) {
@@ -265,4 +239,40 @@ $(document).ready(function () {
             .then(response => console.log(response))
     }
  */
+
+
+
+    //-----------------Builds/Populates the actual movie card--------------
+
+    function buildMovieCard(movie) {
+        let html = ""
+        let movieDetails = extractMovieData(movie);
+
+        //language=HTML
+        html += `
+      
+        <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+            
+            <div id="movie-info-card" class="card border-5 px-0">
+                <p>Movie Title:</p>
+                <p><b style="color: #0fb784">${movieDetails.title}</b></p>
+                <p>Director:</p>
+                <p><b style="color: #0fb784">${movieDetails.director}</b></p>
+                <p>Year:</p>
+                <p><b style="color: #0fb784">${movieDetails.year}</b></p>
+                <p>Genre:</p>
+                <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
+                <p>Actors:</p>
+                <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
+<!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
+                <button id="delete-button">Delete</button>
+               
+                
+            </div>
+        </section>`
+        return html
+
+
+    }
+
 })
