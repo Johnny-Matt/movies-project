@@ -111,6 +111,7 @@ $(document).ready(function () {
                //      return movieIndex
                //  });
                 $("#movieCard").html(buildMovieCardContent(movieData))
+                console.log($("#movieCard"));
 
 
 
@@ -143,6 +144,7 @@ $(document).ready(function () {
 
     function buildMovieCardContent(movieArr) {
         let html = '<div class="row">'
+        console.log("build movie cards")
         for (let i = 0; i < movieArr.length; i++) {
             html += buildMovieCard(movieArr[i]);
         }
