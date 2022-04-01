@@ -1,6 +1,5 @@
 "use strict";
 
-// TODO: Add to ADD, DELETE, and EDIT Functions (ADD Loading GIF)
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
 let loader = document.querySelector('.preloader');
@@ -35,23 +34,16 @@ $(document).ready(function () {
             .then(movieData => {
                 console.log(movieData);
 
-                // ----------------forEach that may be useful later----------------------
-
-                // let moviesTest = movieData.forEach( function output(index){
-                //      console.log(index.id);
-                //      let movieIndex = index
-                //      return movieIndex
-                //  });
                 $("#movieCard").html(buildMovieCardContent(movieData));
                 getMoviesById(movieData);
 
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
+                $("#formPopulate").html(addFormToDiv(movieData));
             })
     }
-
     movieArray()
 
-//    Extracts movie index from fetch data.
+    //    Extracts movie index from fetch data.
     function getMoviesById(movIndex) {
         movIndex.forEach(function output(index) {
             let movieId = index.id
@@ -98,11 +90,24 @@ $(document).ready(function () {
         return html;
     }
 
+    function addFormToDiv () {
+        let html = '<div>';
+        html += buildFormCard();  // Wont build card without a loop - We tried movie.length
+        html += '</div>'
+        return html;
+    }
+    /* Refresh Form Data
+    $("#dropdownMenuButton1").click(function(){
+        let html = "";
+        return html;
+    })
+     */
+
     function addLi (movie) {
         let html = "";
         let movieTitle = extractMovieData(movie);
         //language=HTML
-        html += `<li><a class="dropdown-item" href="#">${movieTitle.title}</a></li>`
+        html += `<li><a class="dropdown-item" href="#"  onClick='buildFormCard();'>${movieTitle.title}</a></li>`
         return html;
     }
     //-----------------Builds/Populates the actual movie card--------------
@@ -127,27 +132,52 @@ $(document).ready(function () {
                     <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
                     <p>Actors:</p>
                     <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
+                    <p>Rating:</p>
+                    <p><b style="color: #0fb784">${movieDetails.rating}</b></p>
 
-                    <!--                <button type="button" id="delete-button" class="btn btn-outline-danger">Delete</button>-->
-                    <button type="button" class="delete-button">Delete</button>
-                    <!-- Button trigger modal
-                    <button type="button" class="btn btn-primary edit-button" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                        Edit ${movieDetails.title}
-                    </button>
-                    -->
-
+                    <button type="button" class="delete-button btn-outline-danger">Delete</button>
                 </div>
             </section>`
         return html
     }
 
+    function buildFormCard (e) {
+        let html = ""
+        let movieDetails = extractMovieData(e);
+        console.log(movieDetails);
+        //language=HTML
+        html += `
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="inputTitle" class="form-label">${movieDetails.title}</label>
+                    <input type="text" class="form-control" id="inputTitle">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputYear" class="form-label">${movieDetails.year}</label>
+                    <input type="text" class="form-control" id="inputYear">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">${movieDetails.director}</label>
+                    <input type="text" class="form-control" id="inputDirector" placeholder="">
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress2" class="form-label">${movieDetails.genre}</label>
+                    <input type="text" class="form-control" id="inputGenre" placeholder="">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary edit-button">Edit</button>
+                </div>
+            </form>
+            `
+        return html;
+    }
+    console.log(buildFormCard());
 
     // ---------------Button and input search functionality-----------------------
     $('#search-movie').on('click', (e) => {
         let searchTitle = $('#search-title').val();
         console.log(searchTitle)
-       movieArray(searchTitle);
+        movieArray(searchTitle);
 
         e.preventDefault();
     });
@@ -157,6 +187,7 @@ $(document).ready(function () {
         addMovie()
 
     })
+
     // ----------------------Add A Movie Function-----------------------------------
     function addMovie() {
         let movieTitle = document.getElementById("add-title").value
@@ -193,11 +224,11 @@ $(document).ready(function () {
 
     // Edit Movie()
     $(document).on("click", "button.edit-button", function(e) {
-
+        //buildFormCard().innerText = "";
         let editMovieTitle = $(this).parent("div").attr("id");
         let movieDetails = extractMovieData(e);
-        let userTitle = document.getElementById(`${movieDetails.title}`).value;
-        userTitle = movieDetails.title.innerHTML
+        let userTitle = document.getElementById('inputTitle').value;
+        //userTitle = movieDetails.title.innerHTML
 
         console.log(userTitle);
 
