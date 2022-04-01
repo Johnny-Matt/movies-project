@@ -187,16 +187,20 @@ $(document).ready(function () {
         console.log(movie)
         fetch(movieUrl, options)
             .then(response => console.log(response))
+            .then(() => movieArray())
+            .catch(error => console.log('Movie not added ', error))
     }
-
-    $(document).on("click","button.delete-button", function (e){
+    //-----------------------------Delete Movie--------------------------
+    $(document).on("click","button.delete-button", function (){
         let deleteMovieId = $(this).parent("div").attr("id");
         let options = {
             method: 'DELETE'
         };
         fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
-            .then(response => console.log(response))
-            console.log(deleteMovieId)
+            .then(response => console.log(response.json()))
+            .then((response) => movieArray())
+            .catch(error => console.log('Movie not deleted', error))
+        console.log(deleteMovieId)
     })
 
     // Edit Movie()
@@ -267,10 +271,28 @@ $(document).ready(function () {
     //     console.log("delete button was click");
     // })
 
+
+    // $(document).on("click","button.delete-button", function (e){
+    //     let deleteMovieId = $(this).parent("div").attr("id");
+    //     let options = {
+    //         method: 'DELETE'
+    //     };
+    //     fetch(`https://grey-yellow-bonnet.glitch.me/movies/${deleteMovieId}`, options)
+    //         .then(response => console.log(response))
+    //     console.log(deleteMovieId)
+    //     movieArray()
+    //
+    // })
+
+
+
+
+
     // document.getElementById("edit-button").addEventListener('click', function () {
     //     editMovie(1);
     //     console.log("button click");
     // })
+
 
     // //movieId just a placeholder parameter for function
     // function deleteMovie(movieId) {
