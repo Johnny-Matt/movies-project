@@ -84,14 +84,14 @@ $(document).ready(function () {
         return html;
     }
 
-    function buildMovieCardModal(modal) {
-        let html = '<div class="row">'
-        for (let i = 0; i < modal.length; i++) {
-            html += buildMovieCard(modal[i]);
-        }
-        html += '</div>';
-        return html;
-    }
+    // function buildMovieCardModal(modal) {
+    //     let html = '<div class="row">'
+    //     for (let i = 0; i < modal.length; i++) {
+    //         html += buildMovieCard(modal[i]);
+    //     }
+    //     html += '</div>';
+    //     return html;
+    // }
 
     //-----------------Builds/Populates the actual movie card--------------
 
@@ -207,7 +207,8 @@ $(document).ready(function () {
     $(document).on("click", "button.edit-button", function(e) {
 
         let editMovieId = $(this).parent("div").attr("id");
-        let movieDetails = extractMovieData(e);
+        console.log(editMovieId)
+        let movieDetails = extractMovieData();
 
         let options = {
             method: 'PATCH',
