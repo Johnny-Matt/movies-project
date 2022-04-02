@@ -55,25 +55,29 @@
 </div>
 
 <div id="formPopulate">
-    <form class="row g-3">
+    <form class="row g-3" id="userInput">
         <div class="col-md-6">
-            <label for="inputTitle" class="form-label"></label>
-            <input type="text" class="form-control" id="inputTitle" value="">
+            <label for="userTitle" class="form-label"></label>
+            <input type="text" class="form-control" id="userTitle">
         </div>
         <div class="col-md-6">
-            <label for="inputYear" class="form-label"></label>
-            <input type="text" class="form-control" id="inputYear">
+            <label for="userYear" class="form-label"></label>
+            <input type="text" class="form-control" id="userYear">
         </div>
         <div class="col-12">
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" id="inputDirector" placeholder="">
+            <label for="userDirector" class="form-label"></label>
+            <input type="text" class="form-control" id="userDirector" placeholder="">
+        </div>
+        <div class="col-6">
+            <label for="userGenre" class="form-label"></label>
+            <input type="text" class="form-control" id="userGenre" placeholder="">
+        </div>
+        <div class="col-6">
+            <label for="userRating" class="form-label"></label>
+            <input type="text" class="form-control" id="userRating" placeholder="">
         </div>
         <div class="col-12">
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" id="inputGenre" placeholder="">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary edit-button">Edit</button>
+            <button type="submit" id="edit-button" class="btn btn-primary edit-button">Edit</button>
         </div>
     </form>
 </div>
