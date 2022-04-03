@@ -206,6 +206,8 @@ $(document).ready(function () {
         addMovie();
         let movieTitleReset = document.getElementById("add-title");
         let movieRatingReset = document.getElementById("add-rating");
+
+                    //--------This clears input fields after submit---------
         movieTitleReset.value = "";
         movieRatingReset.value = "";
     })
@@ -269,6 +271,7 @@ $(document).ready(function () {
             .then(response => response.json())
             .then(response => movieArray())
 
+                    //--------This clears input fields after submit---------
         let titleReset = document.querySelector('#userTitle')
         let yearReset = document.querySelector('#userYear')
         let directorReset = document.querySelector('#userDirector')
