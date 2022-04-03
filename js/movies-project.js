@@ -203,7 +203,13 @@ $(document).ready(function () {
 
     //-------------------Add Movie Event Listener----------------------------------
     document.getElementById("add-movie-button").addEventListener('click', function () {
-        addMovie()
+        addMovie();
+        let movieTitleReset = document.getElementById("add-title");
+        let movieRatingReset = document.getElementById("add-rating");
+
+                    //--------This clears input fields after submit---------
+        movieTitleReset.value = "";
+        movieRatingReset.value = "";
     })
 
     // ----------------------Add A Movie Function-----------------------------------
@@ -241,6 +247,7 @@ $(document).ready(function () {
         console.log(deleteMovieId)
     })
 
+    //-------------------------------Edit Movie-----------------------------
     document.querySelector('#edit-button').addEventListener("click", function (e) {
         e.preventDefault();
         var end = $(dropItLikeItsHot).val();
@@ -263,7 +270,19 @@ $(document).ready(function () {
         fetch(`https://grey-yellow-bonnet.glitch.me/movies/${end}`, options)
             .then(response => response.json())
             .then(response => movieArray())
-        //addMovie();
+
+                    //--------This clears input fields after submit---------
+        let titleReset = document.querySelector('#userTitle')
+        let yearReset = document.querySelector('#userYear')
+        let directorReset = document.querySelector('#userDirector')
+        let genreReset = document.querySelector('#userGenre')
+        let ratingReset = document.querySelector('#userRating')
+
+        titleReset.value = ""
+        yearReset.value = ""
+        directorReset.value = ""
+        genreReset.value = ""
+        ratingReset.value = ""
     })
 
 })
