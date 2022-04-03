@@ -163,18 +163,18 @@ $(document).ready(function () {
         html += `
                 <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
                     <div id="${movieDetails.id}" class="card border-5 px-0">
-                        <p>Movie Title:</p>
-                        <p id="userInput"><b style="color: #0fb784">${movieDetails.title}</b></p>
-                        <p>Director:</p>
-                        <p><b style="color: #0fb784">${movieDetails.director}</b></p>
-                        <p>Year:</p>
-                        <p><b style="color: #0fb784">${movieDetails.year}</b></p>
-                        <p>Genre:</p>
-                        <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
-                        <p>Actors:</p>
-                        <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
-                        <p>Rating:</p>
-                        <p><b style="color: #0fb784">${movieDetails.rating}</b></p>
+                        <p style="color: white">Movie Title:</p>
+                        <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
+                        <p style="color: white">Director:</p>
+                        <p><b style="color: #EA9215">${movieDetails.director}</b></p>
+                        <p style="color: white">Year:</p>
+                        <p><b style="color: #EA9215">${movieDetails.year}</b></p>
+                        <p style="color: white">Genre:</p>
+                        <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
+                        <p style="color: white">Actors:</p>
+                        <p><b style="color: #EA9215">${movieDetails.actors}</b></p>
+                        <p style="color: white">Rating:</p>
+                        <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
                         <button type="button" class="delete-button btn-outline-danger">Delete</button>
                     </div>
                 </section>`
