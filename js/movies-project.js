@@ -248,11 +248,29 @@ $(document).ready(function () {
     })
 
     //-------------------------------Edit Movie-----------------------------
+            //------Event Listener to show form on dropdown click-------
+    let toggleBtn = document.getElementById("dropItLikeItsHot")
+    console.log(toggleBtn);
+
+    toggleBtn.addEventListener("click", function () {
+
+        let name = document.getElementById("formPopulate");
+        name.classList.remove("visibleForm");
+    })
+
+            //------Event Listener to hide form on edit btn click-------
+    document.getElementById("edit-button").addEventListener("click", function (){
+        let name = document.getElementById("formPopulate");
+        name.classList.add("visibleForm");
+    })
+
+            //------Event Listener to edit movie-------
     document.querySelector('#edit-button').addEventListener("click", function (e) {
         e.preventDefault();
         var end = $(dropItLikeItsHot).val();
         let dropDownValue = document.querySelector('#userTitle').value;
         console.log(dropDownValue)
+
         let options = {
             method: 'PATCH',
             headers: {
