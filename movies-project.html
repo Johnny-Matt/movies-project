@@ -13,6 +13,7 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/movies.project.css">
 </head>
 <body>
 
@@ -32,6 +33,7 @@
     </div>
 </div>
 <!-------------------input form for adding a movie---------------------->
+
 <div class="card col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
     <div class="card-header">
         Add a movie
@@ -45,35 +47,37 @@
     </div>
 </div>
 
-<div>
-    <label id="dropdownMenuButton1">
-        Edit
+<!-------------------------Edit a Movie------------------------------->
+<section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2" id="edit-card">
+<div class="card" id="edit-dropdown-container">
+    <label id="dropdownMenuButton1" class="card-header">
+        Select a movie to edit
     </label>
     <select id="dropItLikeItsHot">
 
     </select>
 </div>
 
-<div id="formPopulate">
+<div id="formPopulate" class="visibleForm">
     <form class="row g-3" id="userInput">
-        <div class="col-md-6">
-            <label for="userTitle" class="form-label"></label>
+        <div class="col-12">
+            <label for="userTitle" class="form-label">Title</label>
             <input type="text" class="form-control" id="userTitle">
         </div>
-        <div class="col-md-6">
-            <label for="userYear" class="form-label"></label>
+        <div class="col-12">
+            <label for="userYear" class="form-label">Year</label>
             <input type="text" class="form-control" id="userYear">
         </div>
         <div class="col-12">
-            <label for="userDirector" class="form-label"></label>
+            <label for="userDirector" class="form-label">Director</label>
             <input type="text" class="form-control" id="userDirector" placeholder="">
         </div>
-        <div class="col-6">
-            <label for="userGenre" class="form-label"></label>
+        <div class="col-12">
+            <label for="userGenre" class="form-label">Genre</label>
             <input type="text" class="form-control" id="userGenre" placeholder="">
         </div>
-        <div class="col-6">
-            <label for="userRating" class="form-label"></label>
+        <div class="col-12">
+            <label for="userRating" class="form-label">Rating</label>
             <input type="text" class="form-control" id="userRating" placeholder="">
         </div>
         <div class="col-12">
@@ -81,6 +85,7 @@
         </div>
     </form>
 </div>
+</section>
 
 <!-------------------Movie Card---------------------->
 
