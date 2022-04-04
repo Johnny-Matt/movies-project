@@ -1,22 +1,24 @@
 "use strict";
 
+// export function addMovie() {}
+// import {getWrecked} from 'js/tmdb-project';
+
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
 function loadSpinner () {
-    let loader = document.querySelector('.astroid-preloader');
-    let disc = loader.querySelector('.the-spinner');
-
-    const moviearr = document.querySelector('.hello');
+    const loader = document.querySelector('.asteroid-preloader');
+    const spin = loader.querySelector('.the-spinner');
+    const movieHello = document.querySelector('.asteroid');
     const interval = 500;
 
     console.log("Loading");
     const loadDisc = (arr) => {
         setInterval(() => {
-            disc.innerText = arr; //[Math.floor(Math.random() * arr.length)];
+            spin.innerText = arr;
         }, interval);
     }
     const init = () => {
-        loadDisc(moviearr);
+        loadDisc(movieHello);
     }
     init();
 }
@@ -25,11 +27,12 @@ function loadSpinner () {
 $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
-
+    loadSpinner()
     function movieArray() {
+
         fetch(movieUrl)
             .then(response => {
-                //loadSpinner()
+
                 return response.json()
             })
             .then(movieData => {
@@ -41,9 +44,11 @@ $(document).ready(function () {
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
                 //$("#formPopulate").html(addFormToDiv(movieData));
             })
+
     }
 
     movieArray()
+    //getWrecked()
 
     //    Extracts movie index from fetch data.
     function getMoviesById(movIndex) {
