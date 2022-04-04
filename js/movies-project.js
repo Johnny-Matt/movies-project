@@ -1,22 +1,24 @@
 "use strict";
 
+// export function addMovie() {}
+// import {getWrecked} from 'js/tmdb-project';
+
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
 function loadSpinner () {
-    let loader = document.querySelector('.astroid-preloader');
-    let disc = loader.querySelector('.the-spinner');
-
-    const moviearr = document.querySelector('.hello');
+    const loader = document.querySelector('.asteroid-preloader');
+    const spin = loader.querySelector('.the-spinner');
+    const movieHello = document.querySelector('.asteroid');
     const interval = 500;
 
     console.log("Loading");
     const loadDisc = (arr) => {
         setInterval(() => {
-            disc.innerText = arr; //[Math.floor(Math.random() * arr.length)];
+            spin.innerText = arr;
         }, interval);
     }
     const init = () => {
-        loadDisc(moviearr);
+        loadDisc(movieHello);
     }
     init();
 }
@@ -25,11 +27,12 @@ function loadSpinner () {
 $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
-
+    loadSpinner()
     function movieArray() {
+
         fetch(movieUrl)
             .then(response => {
-                loadSpinner()
+
                 return response.json()
             })
             .then(movieData => {
@@ -41,9 +44,11 @@ $(document).ready(function () {
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
                 //$("#formPopulate").html(addFormToDiv(movieData));
             })
+
     }
 
     movieArray()
+    //getWrecked()
 
     //    Extracts movie index from fetch data.
     function getMoviesById(movIndex) {
@@ -91,41 +96,6 @@ $(document).ready(function () {
         html += '</ul>'
         return html;
     }
-
-    // $("#dropItLikeItsHot").change(function () {
-    //     var end = $(dropItLikeItsHot).val();
-    //     //$(this).attr("title", $(this).find("option:selected").attr("id"));
-    //     console.log(end);
-    //     // let hello = document.getElementById("inputTitle").innerHTML(end);
-    //     // console.log(hello);
-    //     //language=HTML
-    //     //html += `<option value="${movieTitle.title}
-    //     let hello = extractMovieData(title)
-    //     console.log(hello);
-    //     if(hello.id === yellow){
-    //
-    //     } else (hello.id !== yellow) {
-    //         .innerHTML = userInput
-    // }
-
-    // alert(end);
-    // let name = prompt("please enter name", "");
-    // document.getElementById("inputTitle").innerHTML
-    //});
-
-    //<button onclick="getOption()"> Check option </button>
-
-    // function getOption() {
-    //     let selectElement = document.querySelector('#inputTitle').value;
-    //     document.querySelector('.form-control').textContent = selectElement;
-    // }
-
-    // function addFormToDiv() {
-    //     let html = '<div>';
-    //     html += extractMovieData();  // Wont build card without a loop - We tried movie.length
-    //     html += '</div>'
-    //     return html;
-    // }
 
     function addLi(movie) {
         let html = "";
@@ -186,18 +156,6 @@ $(document).ready(function () {
                 </section>`
         return html
     }
-
-    // function buildFormCard (e) {
-    //     let html = ""
-    //     let movieDetails = extractMovieData(e);
-    //     console.log(movieDetails);
-    //     //language=HTML
-    //     html += `
-    //
-    //         `
-    //     return html;
-    // }
-    // console.log(buildFormCard());
 
     // ---------------Button and input search functionality-----------------------
     $('#search-movie').on('click', (e) => {
@@ -311,55 +269,4 @@ $(document).ready(function () {
         actorReset.value = ""
         ratingReset.value = ""
     })
-
 })
-// -------------------------Edit Movie--------------------------------
-// $(document).on("click", "button.edit-button", function (e) {
-//     //buildFormCard().innerText = "";
-//     let editMovieTitle = $(this).parent("div").attr("id");
-//     let movieDetails = extractMovieData(e);
-//     let userTitle = document.getElementById('inputTitle').value;
-//     //userTitle = movieDetails.title.innerHTML
-//
-//     console.log(userTitle);
-//
-//     //let userDirector = document.getElementById("add-rating").value
-//     let options = {
-//         method: 'PATCH',
-//         body: JSON.stringify({
-//             title: movieDetails.title,
-//             year: movieDetails.year,
-//         })
-//     };
-//
-//     fetch(`https://grey-yellow-bonnet.glitch.me/movies/${editMovieTitle}`, options)
-//         .then(response => response.json())
-//         .then(data => data)
-// })
-// -------------------------Delete A Movie Function-----------------------------
-// whatever param entered into deleteMovie is what identifies the movie ID and what will be deleted
-
-// document.getElementsByClassName("delete-button").addEventListener('click', function () {
-//     deleteMovie(257);
-//     console.log("button was clicked");
-//
-// })
-
-//------------------------Possible solution to delete button-----------------
-// for(let movieDetails of movieData) {
-//     $(`#delete-btn${movieDetails.id}`).click(function () {
-//         $(`#delete-btn${movieDetails.id}`).attr('disabled')
-//         let userDelete = confirm(`Are you sure you want to delete ${movieDetails.title}?`)
-//         // DELETE FETCH
-//         if (userDelete) {
-//             fetch(`${movieUrl}/${movieDetails.id}`, deleteOptions)
-//                 .then(res => res.json())
-//                 .then(movieData => console.log(movieData))
-//                 .then(fetchData(2000))
-//                 .then($(`#delete-btn${movieDetails.id}`).removeAttr('disabled'))
-//                 .catch(error => console.error(error))
-//         } else {
-//             $(`#delete-btn${movieDetails.id}`).removeAttr('disabled')
-//         }
-//     })
-// }

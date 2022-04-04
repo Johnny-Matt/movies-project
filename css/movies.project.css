@@ -26,6 +26,11 @@ body{
     color: #1D3E53;
 }
 
-.hello {
-    width: 100%;
+.asteroid {
+    width: 100vw;
+    height: 100vh;
+}
+
+.astroid-preloader.display {
+    visibility: visible;
 }
