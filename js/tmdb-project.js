@@ -1,22 +1,22 @@
 "use strict";
 
-//const tmdbUrl = `https://api.themoviedb.org/3/movie/550?api_key=${TMDB_KEY}`
+const tmdbUrl = `https://api.themoviedb.org/3/`
 
 $(document).ready(function () {
     function tmdbArray() {
         document.getElementById("search-movie").addEventListener('click', function () {
             let userSearch = document.getElementById("search-title").value;
-            let movietmdbUrl = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&language=en-US&query=` + userSearch;
+            let movietmdbUrl = "".concat(tmdbUrl, `search/movie?api_key=${TMDB_KEY}&language=en-US&query=`, userSearch);
             fetch(movietmdbUrl)
                 .then(response => {
                     console.log('response, woo')
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data)
+                    console.log(data);
                     console.log(data.results[0].title);
 
-                    $("#movieCard").html(buildtmdbMovieCardContent(data.results));
+                    $("#tmdbCard").html(buildtmdbMovieCardContent(data.results));
                     getData(data);
 
                     //console.log(extracttmdbMovieData(data.results[0]));
@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     function extracttmdbMovieData(movie) {
         return {
-            //poster: movie.poster_path,
+            poster: movie.poster_path,
             title: movie.title,
             overview: movie.overview,
             //year: movie.release_date,
@@ -60,10 +60,10 @@ $(document).ready(function () {
         html += `
             <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
                 <div id="${movieDetails.title}" class="card border-5 px-0">
-                        <!--<div>
-                          <img src="${movieDetails.poster}" 
+                    <div>
+                        <img src="https://image.tmdb.org/t/p/w185${movieDetails.poster}" 
                                alt="movie art" style="width: 100%" height="80%" >
-                      </div>-->
+                    </div>
                     <p style="color: white">Movie Title:</p>
                     <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
                     <p style="color: white">Year:</p>
