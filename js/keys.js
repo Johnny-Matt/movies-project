@@ -1,1 +1,3 @@
 const OMDB_KEY = "37487a65"
+
+const TMDB_KEY = "d1b203e7aca8731c53666766d7b7335a"

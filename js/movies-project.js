@@ -19,26 +19,14 @@ const init = () => {
 }
 init();
 
-
 // Call Movie API
 $(document).ready(function () {
-
-    //--------------------------OMbD API Call-------------------------
-
-    // fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=37487a65t=black+hawk+down`)
-    //     .then(response => console.log(response.json()))
-
-
-
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
 
     function movieArray() {
         fetch(movieUrl)
-            .then(response => {
-                console.log('response, woo')
-                return response.json();
-            })
+            .then(response => response.json())
             .then(movieData => {
                 console.log(movieData);
 
