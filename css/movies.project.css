@@ -1,0 +1,31 @@
+body{
+    background-image: url("/img/pexels-tobias-bjørkli-1693095.jpg");
+    background-color: black;
+}
+
+
+/*------Edit Movie Card-------*/
+#edit-card{
+   width: 20%;
+
+}
+#formPopulate{
+    background-color: #1D3E53;
+}
+
+.visibleForm{
+    display: none;
+}
+
+.card{
+    background-color: #1D3E53;
+}
+
+.delete-button{
+    background-color: #e90c59;
+    color: #1D3E53;
+}
+
+.hello {
+    width: 100%;
+}
