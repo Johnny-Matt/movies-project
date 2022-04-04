@@ -16,7 +16,7 @@ $(document).ready(function () {
                     console.log(data)
                     console.log(data.results[0].title);
 
-                    $("#movieCard").html(buildtmdbMovieCardContent(data));
+                    $("#movieCard").html(buildtmdbMovieCardContent(data.results));
                     getData(data);
 
                     //console.log(extracttmdbMovieData(data.results[0]));
@@ -66,14 +66,14 @@ $(document).ready(function () {
                       </div>-->
                     <p style="color: white">Movie Title:</p>
                     <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
-                        <!--<p style="color: white">Year:</p>
-                      <p><b style="color: #EA9215">${movieDetails.year}</b></p>
-                      <p style="color: white">Genre:</p>
-                      <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
-                      <p style="color: white">Overview:</p>
-                      <p><b style="color: #EA9215">${movieDetails.overview}</b></p> -->
-                        <!-- <p style="color: white">Rating:</p>
-                      <p><b style="color: #EA9215">${movieDetails.rating}</b></p> -->
+                    <p style="color: white">Year:</p>
+                    <p><b style="color: #EA9215">${movieDetails.year}</b></p>
+                    <p style="color: white">Genre:</p>
+                    <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
+                    <p style="color: white">Overview:</p>
+                    <p><b style="color: #EA9215">${movieDetails.overview}</b></p>
+                    <!-- <p style="color: white">Rating:</p>
+                     <p><b style="color: #EA9215">${movieDetails.rating}</b></p> -->
                 </div>
             </section>`
         return html

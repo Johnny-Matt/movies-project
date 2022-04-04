@@ -2,22 +2,24 @@
 
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
-let loader = document.querySelector('.preloader');
-let disc = loader.querySelector('.spinner');
+function loadSpinner () {
+    let loader = document.querySelector('.astroid-preloader');
+    let disc = loader.querySelector('.the-spinner');
 
-const moviearr = document.querySelector('.hello');
-const interval = 125;
+    const moviearr = document.querySelector('.hello');
+    const interval = 500;
 
-console.log("Loading");
-const loadDisc = (arr) => {
-    setInterval(() => {
-        disc.innerText = arr; //[Math.floor(Math.random() * arr.length)];
-    }, interval);
+    console.log("Loading");
+    const loadDisc = (arr) => {
+        setInterval(() => {
+            disc.innerText = arr; //[Math.floor(Math.random() * arr.length)];
+        }, interval);
+    }
+    const init = () => {
+        loadDisc(moviearr);
+    }
+    init();
 }
-const init = () => {
-    loadDisc(moviearr);
-}
-init();
 
 // Call Movie API
 $(document).ready(function () {
@@ -26,7 +28,10 @@ $(document).ready(function () {
 
     function movieArray() {
         fetch(movieUrl)
-            .then(response => response.json())
+            .then(response => {
+                loadSpinner()
+                return response.json()
+            })
             .then(movieData => {
                 console.log(movieData);
 
