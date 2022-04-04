@@ -133,7 +133,7 @@ $(document).ready(function () {
 
         //language=HTML
         html += `
-                <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+                <section class="col-12 col-sm-6 col-lg-4 col-xl-4 mx-auto mt-2">
                     <div id="${movieDetails.id}" class="card border-5 px-0">
                         <div>
                             <img src="/img/interstellar_2014_film_art.webp" 
