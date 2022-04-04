@@ -19,8 +19,16 @@ const init = () => {
 }
 init();
 
+
 // Call Movie API
 $(document).ready(function () {
+
+    //--------------------------OMbD API Call-------------------------
+
+    // fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=37487a65t=black+hawk+down`)
+    //     .then(response => console.log(response.json()))
+
+
 
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
@@ -140,13 +148,14 @@ $(document).ready(function () {
         fetch("https://grey-yellow-bonnet.glitch.me/movies")
             .then(response => response.json())
             .then(movieData => {
-                movieData.forEach(({id, title, director, genre, rating}) => {
+                movieData.forEach(({id, title, director, genre, actors, rating}) => {
                     if (dropDownYee === title) {
                         document.querySelector('#userInput').innerHTML = id;
                         document.querySelector('#userInput').style.visibility = 'hidden';
                         document.querySelector('#userTitle').value = dropDownYee;
                         document.querySelector('#userDirector').value = director;
                         document.querySelector('#userGenre').value = genre;
+                        document.querySelector('#userActor').value = actors;
                         document.querySelector('#userRating').value = rating;
                     }
                 })
@@ -163,18 +172,22 @@ $(document).ready(function () {
         html += `
                 <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
                     <div id="${movieDetails.id}" class="card border-5 px-0">
-                        <p>Movie Title:</p>
-                        <p id="userInput"><b style="color: #0fb784">${movieDetails.title}</b></p>
-                        <p>Director:</p>
-                        <p><b style="color: #0fb784">${movieDetails.director}</b></p>
-                        <p>Year:</p>
-                        <p><b style="color: #0fb784">${movieDetails.year}</b></p>
-                        <p>Genre:</p>
-                        <p><b style="color: #0fb784">${movieDetails.genre}</b></p>
-                        <p>Actors:</p>
-                        <p><b style="color: #0fb784">${movieDetails.actors}</b></p>
-                        <p>Rating:</p>
-                        <p><b style="color: #0fb784">${movieDetails.rating}</b></p>
+                        <div>
+                            <img src="/img/interstellar_2014_film_art.webp" 
+                                 alt="interstellar movie art" style="width: 100%" height="80%" >
+                        </div>
+                        <p style="color: white">Movie Title:</p>
+                        <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
+                        <p style="color: white">Director:</p>
+                        <p><b style="color: #EA9215">${movieDetails.director}</b></p>
+                        <p style="color: white">Year:</p>
+                        <p><b style="color: #EA9215">${movieDetails.year}</b></p>
+                        <p style="color: white">Genre:</p>
+                        <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
+                        <p style="color: white">Actors:</p>
+                        <p><b style="color: #EA9215">${movieDetails.actors}</b></p>
+                        <p style="color: white">Rating:</p>
+                        <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
                         <button type="button" class="delete-button btn-outline-danger">Delete</button>
                     </div>
                 </section>`
@@ -281,6 +294,7 @@ $(document).ready(function () {
                 year: document.querySelector('#userYear').value,
                 director: document.querySelector('#userDirector').value,
                 genre: document.querySelector('#userGenre').value,
+                actor: document.querySelector('#userActor').value,
                 rating: document.querySelector('#userRating').value
             })
         };
@@ -294,12 +308,14 @@ $(document).ready(function () {
         let yearReset = document.querySelector('#userYear')
         let directorReset = document.querySelector('#userDirector')
         let genreReset = document.querySelector('#userGenre')
+        let actorReset = document.querySelector('#userActor')
         let ratingReset = document.querySelector('#userRating')
 
         titleReset.value = ""
         yearReset.value = ""
         directorReset.value = ""
         genreReset.value = ""
+        actorReset.value = ""
         ratingReset.value = ""
     })
 
