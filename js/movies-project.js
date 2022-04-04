@@ -220,13 +220,24 @@ $(document).ready(function () {
 
         let name = document.getElementById("formPopulate");
         name.classList.remove("visibleForm");
+
     })
+
+    function addPlaceholder() {
+        let moviePlaceholder = extractMovieData(movieData);
+        $('#userTitle').attr('placeholder', `${moviePlaceholder.title}`);
+    }
+
+
 
             //------Event Listener to hide form on edit btn click-------
     document.getElementById("edit-button").addEventListener("click", function (){
         let name = document.getElementById("formPopulate");
         name.classList.add("visibleForm");
     })
+    let selectVal = $(dropItLikeItsHot).val()
+    console.log(selectVal)
+
 
             //------Event Listener to edit movie-------
     document.querySelector('#edit-button').addEventListener("click", function (e) {
