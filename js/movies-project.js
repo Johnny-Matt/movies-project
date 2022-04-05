@@ -26,6 +26,7 @@ $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
     loadSpinner()
+    getWrecked();
     function movieArray() {
 
         fetch(movieUrl)
@@ -39,7 +40,7 @@ $(document).ready(function () {
                 getMoviesById(movieData);
 
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
-                $("#testPlace").html(addPlace(movieData))
+                //$("#testPlace").html(addPlace(movieData))
             })
 
     }
@@ -55,17 +56,17 @@ $(document).ready(function () {
     }
 
     //------------------Obj of Extracted Movie Data---------------------
-    function extractMovieData(movieProp) {
+    function extractMovieData(movie) {
         return {
-            title: movieProp.title,
-            director: movieProp.director,
-            year: movieProp.year,
-            genre: movieProp.genre,
-            actors: movieProp.actors,
-            plot: movieProp.plot,
-            rating: movieProp.rating,
-            poster: movieProp.poster,
-            id: movieProp.id
+            title: movie.title,
+            director: movie.director,
+            year: movie.year,
+            genre: movie.genre,
+            actors: movie.actors,
+            plot: movie.plot,
+            rating: movie.rating,
+            poster: movie.poster_path,
+            id: movie.id
         }
     }
 
@@ -98,31 +99,32 @@ $(document).ready(function () {
     }
 
     //--------------------Add Movie data to Edit form --------------------------
-    function addPlace(movie) {
-        for (let i = 0; i < movie.length; i++) {
-            let html = "";
-            var movieT = movie[i];
-            //language=HTML
-            html += `<label for="userTitle" class="form-label" style="color: white">Title</label>
-                    <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
-            return html;
-        }
-    }
+    // function addPlace(movie) {
+    //     for (let i = 0; i < movie.length; i++) {
+    //         let html = "";
+    //         var movieT = movie[i];
+    //         //language=HTML
+    //         html += `<label for="userTitle" class="form-label" style="color: white">Title</label>
+    //                 <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
+    //         return html;
+    //     }
+    // }
 
-    document.querySelector('#dropItLikeItsHot').addEventListener("click", function () {
-        let dropDownYee = document.querySelector("#dropItLikeItsHot").value;
+    document.querySelector('#dropItLikeItsHot').addEventListener("change", function (e) {
+        console.log(e.target.value);
         fetch("https://grey-yellow-bonnet.glitch.me/movies")
             .then(response => response.json())
             .then(movieData => {
-                movieData.forEach(({id, title, director, genre, actors, rating}) => {
-                    if (dropDownYee === title) {
-                        document.querySelector('#userInput').innerHTML = id;
-                        document.querySelector('#userInput').style.visibility = 'hidden';
-                        document.querySelector('#userTitle').value = dropDownYee;
-                        document.querySelector('#userDirector').value = director;
-                        document.querySelector('#userGenre').value = genre;
-                        document.querySelector('#userActor').value = actors;
-                        document.querySelector('#userRating').value = rating;
+                console.log(movieData);
+                movieData.forEach(movie => {
+                    if (e.target.value === movie.id.toString()) {
+                        //document.getElementById('userInput').style.visibility = 'hidden';
+                        //document.getElementById('userInput').innerHTML = movie.id;
+                        document.getElementById('userTitle').value = movie.title;
+                        document.getElementById('userDirector').value = movie.director;
+                        document.getElementById('userGenre').value = movie.genre;
+                        document.getElementById('userActor').value = movie.actors;
+                        document.getElementById('userRating').value = movie.rating;
                     }
                 })
             });
@@ -167,6 +169,8 @@ $(document).ready(function () {
         movieArray(searchTitle);
         e.preventDefault();
     });
+    document.querySelector('#search-title').value = "";
+
 
     //-------------------Add Movie Event Listener----------------------------------
     document.getElementById("add-movie-button").addEventListener('click', function () {
@@ -225,13 +229,6 @@ $(document).ready(function () {
         name.classList.remove("visibleForm");
 
     })
-
-    //document.getElementById('userTitle').innerHTML += '<input placeholder="hello"/>'
-
-    // function addPlaceholder() {
-    //     let moviePlaceholder = extractMovieData(movieData);
-    //     $('#userTitle').attr('placeholder', `${moviePlaceholder.title}`);
-    // }
 
             //------Event Listener to hide form on edit btn click-------
     document.getElementById("edit-button").addEventListener("click", function (){

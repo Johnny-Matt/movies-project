@@ -43,8 +43,9 @@ function getWrecked() {
             poster: movie.poster_path,
             title: movie.title,
             overview: movie.overview,
-            //year: movie.release_date,
-            //genre: movie.genre_ids
+            year: movie.release_date,
+            genre: movie.genre_ids,
+            rating: movie.vote_average,
             id: movie.id
         }
     }
@@ -109,4 +110,4 @@ function getWrecked() {
     //     //     .catch(error => console.log('Movie not added ', error))
     // }
 }
-getWrecked();
+//getWrecked();
