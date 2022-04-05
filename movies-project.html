@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movies Projects</title>
+    <title>SPACE Movies</title>
     <!------ JQuery --------->
     <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -19,9 +19,9 @@
 
 <!--------------------- Spinner -------------------->
 
-<div class="astroid-preloader">
+<div class="asteroid-preloader">
     <div class="the-spinner">
-        <img class="hello" src="img/video_AdobeCreativeCloudExpress.gif">
+        <img class="asteroid" src="img/video_AdobeCreativeCloudExpress.gif" alt="Image loader">
     </div>
 </div>
 
@@ -35,22 +35,20 @@
 </div>
 
 <!-------------------------Edit a Movie------------------------------->
-<section class="row">
-<section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2" id="edit-card">
+<section class="col">
+<section class="col-6 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2" id="edit-card">
 <div class="card" id="edit-dropdown-container">
     <label id="dropdownMenuButton1" class="card-header" style="color: white">
         Select a movie to edit
     </label>
-    <select id="dropItLikeItsHot">
-
-    </select>
+    <select id="dropItLikeItsHot"></select>
 </div>
 
 <div id="formPopulate" class="visibleForm">
     <form class="row g-3" id="userInput">
-        <div class="col-12">
-            <label for="userTitle" class="form-label" style="color: white">Title</label>
-            <input type="text" class="form-control" id="userTitle">
+        <div class="col-12" id="testPlace">
+            <!-- <label for="userTitle" class="form-label" style="color: white">Title</label>
+            <input type="text" class="form-control" id="userTitle">-->
         </div>
         <div class="col-12">
             <label for="userDirector" class="form-label" style="color: white">Director</label>
@@ -81,7 +79,7 @@
 
 <!-------------------input form for adding a movie---------------------->
 
-<div class="card col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+<div class="card col-6 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2">
     <div class="card-header" style="color: white">
         Add a movie
     </div>
@@ -99,8 +97,6 @@
 
 <div id="tmdbCard"></div>
 <div id="movieCard"></div>
-
-<!--<div id="container" class="container d-flex justify-content-evenly flex-wrap"></div>-->
 
 <script SRC="js/keys.js"></script>
 <script src="/js/movies-project.js"></script>

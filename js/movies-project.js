@@ -1,35 +1,35 @@
 "use strict";
 
+//export function movieArray() {}
+//import {getWrecked} from 'js/tmdb-project';
+
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
 function loadSpinner () {
-    let loader = document.querySelector('.astroid-preloader');
-    let disc = loader.querySelector('.the-spinner');
-
-    const moviearr = document.querySelector('.hello');
+    const loader = document.querySelector('.asteroid-preloader');
+    const spin = loader.querySelector('.the-spinner');
+    const movieHello = document.querySelector('.asteroid');
     const interval = 500;
 
-    console.log("Loading");
     const loadDisc = (arr) => {
         setInterval(() => {
-            disc.innerText = arr; //[Math.floor(Math.random() * arr.length)];
+            spin.innerText = arr;
         }, interval);
     }
     const init = () => {
-        loadDisc(moviearr);
+        loadDisc(movieHello);
     }
     init();
 }
 
-// Call Movie API
 $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
-
+    loadSpinner()
     function movieArray() {
+
         fetch(movieUrl)
             .then(response => {
-                //loadSpinner()
                 return response.json()
             })
             .then(movieData => {
@@ -39,22 +39,22 @@ $(document).ready(function () {
                 getMoviesById(movieData);
 
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
-                //$("#formPopulate").html(addFormToDiv(movieData));
+                $("#testPlace").html(addPlace(movieData))
             })
-    }
 
+    }
     movieArray()
+    //getWrecked()
 
     //    Extracts movie index from fetch data.
     function getMoviesById(movIndex) {
         movIndex.forEach(function output(index) {
-            let movieId = index.id
-            console.log(movieId)
+            // let movieId = index.id
+            // console.log(movieId)
         })
     }
 
     //------------------Obj of Extracted Movie Data---------------------
-
     function extractMovieData(movieProp) {
         return {
             title: movieProp.title,
@@ -70,7 +70,6 @@ $(document).ready(function () {
     }
 
     //-----------------Gathers actual card contents---------------------
-
     function buildMovieCardContent(movieArr) {
         let html = '<div class="row">'
         for (let i = 0; i < movieArr.length; i++) {
@@ -84,8 +83,6 @@ $(document).ready(function () {
     function addMovieToUl(movie) {
         let html = '<ul>';
         for (let i = 0; i < movie.length; i++) {
-            let oh = movie[i];
-            console.log(oh.title);
             html += addLi(movie[i]);
         }
         html += '</ul>'
@@ -96,9 +93,20 @@ $(document).ready(function () {
         let html = "";
         let movieTitle = extractMovieData(movie);
         //language=HTML
-        html += `
-            <option value="${movieTitle.id}">${movieTitle.title}</option>`
+        html += `<option value="${movieTitle.id}">${movieTitle.title}</option>`
         return html;
+    }
+
+    //--------------------Add Movie data to Edit form --------------------------
+    function addPlace(movie) {
+        for (let i = 0; i < movie.length; i++) {
+            let html = "";
+            var movieT = movie[i];
+            //language=HTML
+            html += `<label for="userTitle" class="form-label" style="color: white">Title</label>
+                    <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
+            return html;
+        }
     }
 
     document.querySelector('#dropItLikeItsHot').addEventListener("click", function () {
@@ -128,7 +136,7 @@ $(document).ready(function () {
 
         //language=HTML
         html += `
-                <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
+                <section class="col-12 col-sm-6 col-lg-4 col-xl-4 mx-auto mt-2">
                     <div id="${movieDetails.id}" class="card border-5 px-0">
                         <div>
                             <img src="/img/interstellar_2014_film_art.webp" 
@@ -215,12 +223,21 @@ $(document).ready(function () {
 
         let name = document.getElementById("formPopulate");
         name.classList.remove("visibleForm");
+
     })
+
+    //document.getElementById('userTitle').innerHTML += '<input placeholder="hello"/>'
+
+    // function addPlaceholder() {
+    //     let moviePlaceholder = extractMovieData(movieData);
+    //     $('#userTitle').attr('placeholder', `${moviePlaceholder.title}`);
+    // }
 
             //------Event Listener to hide form on edit btn click-------
     document.getElementById("edit-button").addEventListener("click", function (){
         let name = document.getElementById("formPopulate");
         name.classList.add("visibleForm");
+
     })
 
             //------Event Listener to edit movie-------
