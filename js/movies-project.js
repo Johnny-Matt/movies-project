@@ -42,7 +42,7 @@ $(document).ready(function () {
                 getMoviesById(movieData);
 
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
-                //$("#formPopulate").html(addFormToDiv(movieData));
+                $("#testPlace").html(addPlace(movieData))
             })
 
     }
@@ -53,8 +53,8 @@ $(document).ready(function () {
     //    Extracts movie index from fetch data.
     function getMoviesById(movIndex) {
         movIndex.forEach(function output(index) {
-            let movieId = index.id
-            console.log(movieId)
+            // let movieId = index.id
+            // console.log(movieId)
         })
     }
 
@@ -85,12 +85,13 @@ $(document).ready(function () {
         return html;
     }
 
+
     //-----------------Edit button with movie titles---------------------
     function addMovieToUl(movie) {
         let html = '<ul>';
         for (let i = 0; i < movie.length; i++) {
             let oh = movie[i];
-            console.log(oh.title);
+            // console.log(oh.title);
             html += addLi(movie[i]);
         }
         html += '</ul>'
@@ -106,8 +107,24 @@ $(document).ready(function () {
         return html;
     }
 
-    document.querySelector('#dropItLikeItsHot').addEventListener("click", function () {
+    function addPlace(movie) {
+        for (let i = 0; i < movie.length; i++) {
+            let html = "";
+            var movieT = movie[i];
+            //language=HTML
+
+            html += `<label for="userTitle" class="form-label" style="color: white">Title</label>
+                <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
+            return html;
+        }
+    }
+
+
+
+    document.querySelector('#dropItLikeItsHot').addEventListener("click", function ()
+    {
         let dropDownYee = document.querySelector("#dropItLikeItsHot").value;
+        console.log("droppedIt")
         fetch("https://grey-yellow-bonnet.glitch.me/movies")
             .then(response => response.json())
             .then(movieData => {
@@ -223,13 +240,6 @@ $(document).ready(function () {
 
     })
 
-    function addPlaceholder() {
-        let moviePlaceholder = extractMovieData(movieData);
-        $('#userTitle').attr('placeholder', `${moviePlaceholder.title}`);
-    }
-
-
-
             //------Event Listener to hide form on edit btn click-------
     document.getElementById("edit-button").addEventListener("click", function (){
         let name = document.getElementById("formPopulate");
@@ -245,6 +255,8 @@ $(document).ready(function () {
         var end = $(dropItLikeItsHot).val();
         let dropDownValue = document.querySelector('#userTitle').value;
         console.log(dropDownValue)
+
+
 
         let options = {
             method: 'PATCH',
