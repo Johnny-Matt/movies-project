@@ -1,17 +1,16 @@
 "use strict";
 
-// export function addMovie() {}
-// import {getWrecked} from 'js/tmdb-project';
+//export function movieArray() {}
+//import {getWrecked} from 'js/tmdb-project';
 
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
-function loadSpinner () {
+function loadSpinner() {
     const loader = document.querySelector('.asteroid-preloader');
     const spin = loader.querySelector('.the-spinner');
     const movieHello = document.querySelector('.asteroid');
     const interval = 500;
 
-    console.log("Loading");
     const loadDisc = (arr) => {
         setInterval(() => {
             spin.innerText = arr;
@@ -23,16 +22,15 @@ function loadSpinner () {
     init();
 }
 
-// Call Movie API
 $(document).ready(function () {
     // Glitch Movie API
     const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
     loadSpinner()
+
     function movieArray() {
 
         fetch(movieUrl)
             .then(response => {
-
                 return response.json()
             })
             .then(movieData => {
@@ -59,7 +57,6 @@ $(document).ready(function () {
     }
 
     //------------------Obj of Extracted Movie Data---------------------
-
     function extractMovieData(movieProp) {
         return {
             title: movieProp.title,
@@ -75,7 +72,6 @@ $(document).ready(function () {
     }
 
     //-----------------Gathers actual card contents---------------------
-
     function buildMovieCardContent(movieArr) {
         let html = '<div class="row">'
         for (let i = 0; i < movieArr.length; i++) {
@@ -92,6 +88,7 @@ $(document).ready(function () {
         for (let i = 0; i < movie.length; i++) {
             let oh = movie[i];
             // console.log(oh.title);
+
             html += addLi(movie[i]);
         }
         html += '</ul>'
@@ -107,6 +104,9 @@ $(document).ready(function () {
         return html;
     }
 
+
+    //--------------------Add Movie data to Edit form --------------------------
+
     function addPlace(movie) {
         for (let i = 0; i < movie.length; i++) {
             let html = "";
@@ -114,32 +114,35 @@ $(document).ready(function () {
             //language=HTML
 
             html += `<label for="userTitle" class="form-label" style="color: white">Title</label>
-                <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
+            <input type="text" class="form-control" id="userTitle" value="${movieT.title}"/>`
+
             return html;
         }
     }
 
 
+    document.querySelector('#dropItLikeItsHot').addEventListener("click", function () {
 
-    document.querySelector('#dropItLikeItsHot').addEventListener("click", function ()
-    {
-        let dropDownYee = document.querySelector("#dropItLikeItsHot").value;
-        console.log("droppedIt")
-        fetch("https://grey-yellow-bonnet.glitch.me/movies")
-            .then(response => response.json())
-            .then(movieData => {
-                movieData.forEach(({id, title, director, genre, actors, rating}) => {
-                    if (dropDownYee === title) {
-                        document.querySelector('#userInput').innerHTML = id;
-                        document.querySelector('#userInput').style.visibility = 'hidden';
-                        document.querySelector('#userTitle').value = dropDownYee;
-                        document.querySelector('#userDirector').value = director;
-                        document.querySelector('#userGenre').value = genre;
-                        document.querySelector('#userActor').value = actors;
-                        document.querySelector('#userRating').value = rating;
-                    }
-                })
-            });
+        document.querySelector('#dropItLikeItsHot').addEventListener("click", function () {
+
+            let dropDownYee = document.querySelector("#dropItLikeItsHot").value;
+            console.log("droppedIt")
+            fetch("https://grey-yellow-bonnet.glitch.me/movies")
+                .then(response => response.json())
+                .then(movieData => {
+                    movieData.forEach(({id, title, director, genre, actors, rating}) => {
+                        if (dropDownYee === title) {
+                            document.querySelector('#userInput').innerHTML = id;
+                            document.querySelector('#userInput').style.visibility = 'hidden';
+                            document.querySelector('#userTitle').value = dropDownYee;
+                            document.querySelector('#userDirector').value = director;
+                            document.querySelector('#userGenre').value = genre;
+                            document.querySelector('#userActor').value = actors;
+                            document.querySelector('#userRating').value = rating;
+                        }
+                    })
+                });
+        })
     })
 
     //-----------------Builds/Populates the actual movie card--------------
@@ -150,27 +153,27 @@ $(document).ready(function () {
 
         //language=HTML
         html += `
-                <section class="col-12 col-sm-6 col-lg-4 col-xl-4 mx-auto mt-2">
-                    <div id="${movieDetails.id}" class="card border-5 px-0">
-                        <div>
-                            <img src="/img/interstellar_2014_film_art.webp" 
-                                 alt="interstellar movie art" style="width: 100%" height="80%" >
-                        </div>
-                        <p style="color: white">Movie Title:</p>
-                        <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
-                        <p style="color: white">Director:</p>
-                        <p><b style="color: #EA9215">${movieDetails.director}</b></p>
-                        <p style="color: white">Year:</p>
-                        <p><b style="color: #EA9215">${movieDetails.year}</b></p>
-                        <p style="color: white">Genre:</p>
-                        <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
-                        <p style="color: white">Actors:</p>
-                        <p><b style="color: #EA9215">${movieDetails.actors}</b></p>
-                        <p style="color: white">Rating:</p>
-                        <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
-                        <button type="button" class="delete-button btn-outline-danger">Delete</button>
+            <section class="col-12 col-sm-6 col-lg-4 col-xl-4 mx-auto mt-2">
+                <div id="${movieDetails.id}" class="card border-5 px-0">
+                    <div>
+                        <img src="/img/interstellar_2014_film_art.webp"
+                             alt="interstellar movie art" style="width: 100%" height="80%">
                     </div>
-                </section>`
+                    <p style="color: white">Movie Title:</p>
+                    <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
+                    <p style="color: white">Director:</p>
+                    <p><b style="color: #EA9215">${movieDetails.director}</b></p>
+                    <p style="color: white">Year:</p>
+                    <p><b style="color: #EA9215">${movieDetails.year}</b></p>
+                    <p style="color: white">Genre:</p>
+                    <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
+                    <p style="color: white">Actors:</p>
+                    <p><b style="color: #EA9215">${movieDetails.actors}</b></p>
+                    <p style="color: white">Rating:</p>
+                    <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
+                    <button type="button" class="delete-button btn-outline-danger">Delete</button>
+                </div>
+            </section>`
         return html
     }
 
@@ -188,7 +191,7 @@ $(document).ready(function () {
         let movieTitleReset = document.getElementById("add-title");
         let movieRatingReset = document.getElementById("add-rating");
 
-                    //--------This clears input fields after submit---------
+        //--------This clears input fields after submit---------
         movieTitleReset.value = "";
         movieRatingReset.value = "";
     })
@@ -229,7 +232,7 @@ $(document).ready(function () {
     })
 
     //-------------------------------Edit Movie-----------------------------
-            //------Event Listener to show form on dropdown click-------
+    //------Event Listener to show form on dropdown click-------
     let toggleBtn = document.getElementById("dropItLikeItsHot")
     console.log(toggleBtn);
 
@@ -240,22 +243,28 @@ $(document).ready(function () {
 
     })
 
-            //------Event Listener to hide form on edit btn click-------
-    document.getElementById("edit-button").addEventListener("click", function (){
+
+    //document.getElementById('userTitle').innerHTML += '<input placeholder="hello"/>'
+
+    // function addPlaceholder() {
+    //     let moviePlaceholder = extractMovieData(movieData);
+    //     $('#userTitle').attr('placeholder', `${moviePlaceholder.title}`);
+    // }
+
+
+    //------Event Listener to hide form on edit btn click-------
+    document.getElementById("edit-button").addEventListener("click", function () {
         let name = document.getElementById("formPopulate");
         name.classList.add("visibleForm");
+
     })
-    let selectVal = $(dropItLikeItsHot).val()
-    console.log(selectVal)
 
-
-            //------Event Listener to edit movie-------
+    //------Event Listener to edit movie-------
     document.querySelector('#edit-button').addEventListener("click", function (e) {
         e.preventDefault();
         var end = $(dropItLikeItsHot).val();
         let dropDownValue = document.querySelector('#userTitle').value;
         console.log(dropDownValue)
-
 
 
         let options = {
@@ -277,7 +286,7 @@ $(document).ready(function () {
             .then(response => response.json())
             .then(response => movieArray())
 
-                    //--------This clears input fields after submit---------
+        //--------This clears input fields after submit---------
         let titleReset = document.querySelector('#userTitle')
         let yearReset = document.querySelector('#userYear')
         let directorReset = document.querySelector('#userDirector')

@@ -1,7 +1,7 @@
 "use strict";
 
-// import {addMovie} from 'js/movies-project.js';
-// export function getWrecked() {}
+//import {movieArray} from 'js/movies-project.js';
+//export function getWrecked() {}
 
 const tmdbUrl = `https://api.themoviedb.org/3/`
 
@@ -29,7 +29,6 @@ function getWrecked() {
                 })
         })
     }
-
     tmdbArray()
 
     function getData(data) {
@@ -87,16 +86,15 @@ function getWrecked() {
     }
 
     // document.querySelector(".add-button").addEventListener('click', function () {
-    //     addMovie();
+    //     addTMovie();
     // });
-}
-getWrecked();
-    // ----------------------Add A Movie Function-----------------------------------
-    // function addtmdbMovie() {
-    //     let movieTitle = document.getElementById("add-title").value
-    //     console.log(movieTitle)
+    // addTMovie()
+    // // ----------------------Add A Movie Function-----------------------------------
+    // function addTMovie() {
+    //     let tmdbTitle = document.getElementById("add-title").value
+    //     console.log(tmdbTitle)
     //
-    //     let movie = {title: movieTitle, rating: movieRating};
+    //     //let movie = {title: tmdbDetails.title};
     //     let options = {
     //         method: 'POST',
     //         headers: {
@@ -105,10 +103,10 @@ getWrecked();
     //         body: JSON.stringify(movie),
     //     };
     //     console.log(movie)
-    //     fetch(movieUrl, options)
-    //         .then(response => console.log(response))
-    //         .then(() => movieArray())
-    //         .catch(error => console.log('Movie not added ', error))
+    //     // fetch(movieUrl, options)
+    //     //     .then(response => console.log(response))
+    //     //     .then(() => movieArray())
+    //     //     .catch(error => console.log('Movie not added ', error))
     // }
-
-
+}
+getWrecked();
