@@ -1,9 +1,8 @@
 "use strict";
 
-//export function movieArray() {}
-//import {getWrecked} from 'js/tmdb-project';
-
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
+
+const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
 
 function loadSpinner () {
     const loader = document.querySelector('.asteroid-preloader');
@@ -24,7 +23,6 @@ function loadSpinner () {
 
 $(document).ready(function () {
     // Glitch Movie API
-    const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
     loadSpinner()
     getWrecked();
     function movieArray() {
@@ -37,7 +35,7 @@ $(document).ready(function () {
                 console.log(movieData);
 
                 $("#movieCard").html(buildMovieCardContent(movieData));
-                getMoviesById(movieData);
+                //getMoviesById(movieData);
 
                 $("#dropItLikeItsHot").html(addMovieToUl(movieData));
                 //$("#testPlace").html(addPlace(movieData))
@@ -48,27 +46,28 @@ $(document).ready(function () {
     //getWrecked()
 
     //    Extracts movie index from fetch data.
-    function getMoviesById(movIndex) {
-        movIndex.forEach(function output(index) {
-            // let movieId = index.id
-            // console.log(movieId)
-        })
-    }
+    // function getMoviesById(movIndex) {
+    //     movIndex.forEach(function output(index) {
+    //         // let movieId = index.id
+    //         // console.log(movieId)
+    //     })
+    // }
 
     //------------------Obj of Extracted Movie Data---------------------
-    function extractMovieData(movie) {
-        return {
-            title: movie.title,
-            director: movie.director,
-            year: movie.year,
-            genre: movie.genre,
-            actors: movie.actors,
-            plot: movie.plot,
-            rating: movie.rating,
-            poster: movie.poster_path,
-            id: movie.id
-        }
-    }
+    // function extractMovieData(movie) {
+    //     return {
+    //         title: movie.title,
+    //         director: movie.director,
+    //         year: movie.year,
+    //         genre: movie.genre,
+    //         actors: movie.actors,
+    //         plot: movie.plot,
+    //         rating: movie.rating,
+    //         poster: movie.poster,
+    //         id: movie.id,
+    //         url: movie.url
+    //     }
+    // }
 
     //-----------------Gathers actual card contents---------------------
     function buildMovieCardContent(movieArr) {
@@ -92,9 +91,9 @@ $(document).ready(function () {
 
     function addLi(movie) {
         let html = "";
-        let movieTitle = extractMovieData(movie);
+        //let movieTitle = extractMovieData(movie);
         //language=HTML
-        html += `<option value="${movieTitle.id}">${movieTitle.title}</option>`
+        html += `<option value="${movie.id}">${movie.title}</option>`
         return html;
     }
 
@@ -118,13 +117,12 @@ $(document).ready(function () {
                 console.log(movieData);
                 movieData.forEach(movie => {
                     if (e.target.value === movie.id.toString()) {
-                        //document.getElementById('userInput').style.visibility = 'hidden';
-                        //document.getElementById('userInput').innerHTML = movie.id;
                         document.getElementById('userTitle').value = movie.title;
                         document.getElementById('userDirector').value = movie.director;
                         document.getElementById('userGenre').value = movie.genre;
                         document.getElementById('userActor').value = movie.actors;
                         document.getElementById('userRating').value = movie.rating;
+                        document.getElementById('userUrl').value = movie.url;
                     }
                 })
             });
@@ -134,28 +132,27 @@ $(document).ready(function () {
 
     function buildMovieCard(movie) {
         let html = ""
-        let movieDetails = extractMovieData(movie);
+        //let movieDetails = extractMovieData(movie);
 
         //language=HTML
         html += `
                 <section class="col-12 col-sm-6 col-lg-4 col-xl-4 mx-auto mt-2">
-                    <div id="${movieDetails.id}" class="card border-5 px-0">
+                    <div id="${movie.id}" class="card border-5 px-0">
                         <div>
-                            <img src="/img/interstellar_2014_film_art.webp" 
-                                 alt="interstellar movie art" style="width: 100%" height="80%" >
+                            <img src="${movie.url}" alt="user movie art" style="width: 100%; height: 100%" />
                         </div>
                         <p style="color: white">Movie Title:</p>
-                        <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>
+                        <p id="userInput"><b style="color: #EA9215">${movie.title}</b></p>
                         <p style="color: white">Director:</p>
-                        <p><b style="color: #EA9215">${movieDetails.director}</b></p>
+                        <p><b style="color: #EA9215">${movie.director}</b></p>
                         <p style="color: white">Year:</p>
-                        <p><b style="color: #EA9215">${movieDetails.year}</b></p>
+                        <p><b style="color: #EA9215">${movie.year}</b></p>
                         <p style="color: white">Genre:</p>
-                        <p><b style="color: #EA9215">${movieDetails.genre}</b></p>
+                        <p><b style="color: #EA9215">${movie.genre}</b></p>
                         <p style="color: white">Actors:</p>
-                        <p><b style="color: #EA9215">${movieDetails.actors}</b></p>
+                        <p><b style="color: #EA9215">${movie.actors}</b></p>
                         <p style="color: white">Rating:</p>
-                        <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
+                        <p><b style="color: #EA9215">${movie.rating}</b></p>
                         <button type="button" class="delete-button btn-outline-danger">Delete</button>
                     </div>
                 </section>`
@@ -177,20 +174,21 @@ $(document).ready(function () {
         addMovie();
         let movieTitleReset = document.getElementById("add-title");
         let movieRatingReset = document.getElementById("add-rating");
+        let movieUrlReset = document.getElementById("add-url");
 
                     //--------This clears input fields after submit---------
         movieTitleReset.value = "";
         movieRatingReset.value = "";
+        movieUrlReset.value = "";
     })
 
     // ----------------------Add A Movie Function-----------------------------------
     function addMovie() {
         let movieTitle = document.getElementById("add-title").value
         let movieRating = document.getElementById("add-rating").value
-        console.log(movieTitle)
-        console.log(movieRating)
+        let moviePosterUrl = document.getElementById("add-url").value
 
-        let movie = {title: movieTitle, rating: movieRating};
+        let movie = {title: movieTitle, rating: movieRating, url: moviePosterUrl};
         let options = {
             method: 'POST',
             headers: {
@@ -255,7 +253,8 @@ $(document).ready(function () {
                 director: document.querySelector('#userDirector').value,
                 genre: document.querySelector('#userGenre').value,
                 actor: document.querySelector('#userActor').value,
-                rating: document.querySelector('#userRating').value
+                rating: document.querySelector('#userRating').value,
+                url: document.querySelector('#userUrl').value
             })
         };
 
@@ -264,18 +263,20 @@ $(document).ready(function () {
             .then(response => movieArray())
 
                     //--------This clears input fields after submit---------
-        let titleReset = document.querySelector('#userTitle')
-        let yearReset = document.querySelector('#userYear')
-        let directorReset = document.querySelector('#userDirector')
-        let genreReset = document.querySelector('#userGenre')
-        let actorReset = document.querySelector('#userActor')
-        let ratingReset = document.querySelector('#userRating')
+        let titleReset = document.querySelector('#userTitle');
+        let yearReset = document.querySelector('#userYear');
+        let directorReset = document.querySelector('#userDirector');
+        let genreReset = document.querySelector('#userGenre');
+        let actorReset = document.querySelector('#userActor');
+        let ratingReset = document.querySelector('#userRating');
+        let URLReset = document.querySelector('#userUrl');
 
-        titleReset.value = ""
-        yearReset.value = ""
-        directorReset.value = ""
-        genreReset.value = ""
-        actorReset.value = ""
-        ratingReset.value = ""
+        titleReset.value = "";
+        yearReset.value = "";
+        directorReset.value = "";
+        genreReset.value = "";
+        actorReset.value = "";
+        ratingReset.value = "";
+        URLReset.value = "";
     })
 })

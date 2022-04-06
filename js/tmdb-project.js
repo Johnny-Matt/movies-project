@@ -1,9 +1,7 @@
 "use strict";
 
-//import {movieArray} from 'js/movies-project.js';
-//export function getWrecked() {}
-
 const tmdbUrl = `https://api.themoviedb.org/3/`
+let lastSearchResults = [];
 
 function getWrecked() {
     function tmdbArray() {
@@ -19,24 +17,24 @@ function getWrecked() {
                 })
                 .then(data => {
                     console.log(data.results[0].title);
-                    //hideLoader();
+                    lastSearchResults = data.results;
 
                     $("#tmdbCard").html(buildtmdbMovieCardContent(data.results));
-                    getData(data);
-
-                    //console.log(extracttmdbMovieData(data.results[0]));
-
+                    $(".add-button").on('click', function (e) {
+                        saveTMovie(e);
+                    });
+                    //getData(data);
                 })
         })
     }
     tmdbArray()
 
-    function getData(data) {
-        for (let m = 0; m < data.results.length; m++) {
-            let movie = data.results[m];
-            console.log(movie.title);
-        }
-    }
+    // function getData(data) {
+    //     for (let m = 0; m < data.results.length; m++) {
+    //         //let movie = data.results[m];
+    //         //console.log(movie.title);
+    //     }
+    // }
 
     function extracttmdbMovieData(movie) {
         return {
@@ -80,34 +78,37 @@ function getWrecked() {
                     <p><b style="color: #EA9215">${movieDetails.overview}</b></p>
                     <p style="color: white">Rating:</p>
                     <p><b style="color: #EA9215">${movieDetails.rating}</b></p>
-                    <button type="button" class="add-button">Add</button>
+                    <button type="button" class="add-button" data-id="${movieDetails.id}">Add</button>
                 </div>
             </section>`
         return html
     }
 
-    // document.querySelector(".add-button").addEventListener('click', function () {
-    //     addTMovie();
-    // });
-    // addTMovie()
-    // // ----------------------Add A Movie Function-----------------------------------
-    // function addTMovie() {
-    //     let tmdbTitle = document.getElementById("add-title").value
-    //     console.log(tmdbTitle)
-    //
-    //     //let movie = {title: tmdbDetails.title};
-    //     let options = {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(movie),
-    //     };
-    //     console.log(movie)
-    //     // fetch(movieUrl, options)
-    //     //     .then(response => console.log(response))
-    //     //     .then(() => movieArray())
-    //     //     .catch(error => console.log('Movie not added ', error))
-    // }
+
+
+    // ----------------------Add A Movie Function-----------------------------------
+    function saveTMovie(e) {
+        let tmdbID = e.target.getAttribute("data-id");
+        let matched = lastSearchResults.filter(function(ele){
+            if (tmdbID === ele.id.toString()){
+                return true;
+            } else {
+                return false;
+            }
+        })
+        let movieT = extracttmdbMovieData(matched[0]);
+
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieT),
+        };
+        console.log(movieT);
+        fetch(movieUrl, options)
+            .then(response => console.log(response))
+            .then(() => alert("Its been saved"))
+            .catch(error => console.log('Movie not added ', error))
+    }
 }
-//getWrecked();
