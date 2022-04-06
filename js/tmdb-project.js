@@ -38,7 +38,7 @@ function getWrecked() {
 
     function extracttmdbMovieData(movie) {
         return {
-            poster: movie.poster_path,
+            url: "https://image.tmdb.org/t/p/w185".concat(movie.poster_path),
             title: movie.title,
             overview: movie.overview,
             year: movie.release_date,
@@ -65,8 +65,8 @@ function getWrecked() {
             <section class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
                 <div id="${movieDetails.title}" class="card border-5 px-0">
                     <div>
-                        <img src="https://image.tmdb.org/t/p/w185${movieDetails.poster}"
-                             alt="movie art" style="width: 100%" height="80%">
+                        <img src="${movieDetails.url}"
+                             alt="movie art" style="width: 100%; height: 80%">
                     </div>
                     <p style="color: white">Movie Title:</p>
                     <p id="userInput"><b style="color: #EA9215">${movieDetails.title}</b></p>

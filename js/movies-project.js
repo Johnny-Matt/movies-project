@@ -132,7 +132,6 @@ $(document).ready(function () {
 
     function buildMovieCard(movie) {
         let html = ""
-        //let movieDetails = extractMovieData(movie);
 
         //language=HTML
         html += `
@@ -176,7 +175,7 @@ $(document).ready(function () {
         let movieRatingReset = document.getElementById("add-rating");
         let movieUrlReset = document.getElementById("add-url");
 
-                    //--------This clears input fields after submit---------
+    //--------This clears input fields after submit---------
         movieTitleReset.value = "";
         movieRatingReset.value = "";
         movieUrlReset.value = "";
