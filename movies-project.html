@@ -28,18 +28,15 @@
 <!----------------------Search---------------------->
 
 <div class="col-12 col-sm-6 col-lg-4 col-xl-4 col-xxl-2 mx-auto mt-2">
-    <div class="input-group mb-3" id="searchBox">
+    <div class="input-group mb-3">
         <button class="input-group-text" id="search-movie">Search</button>
         <input type="text" class="form-control" placeholder="Search movie title" id="search-title"/>
     </div>
 </div>
 
 <!-------------------------Edit a Movie------------------------------->
-
-
-
 <section class="col">
-    <section class="col-12 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2" id="edit-card">
+    <section class="col-6 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2" id="edit-card">
         <div class="card" id="edit-dropdown-container">
             <label id="dropdownMenuButton1" class="card-header" style="color: white">
                 Select a movie to edit
@@ -50,7 +47,6 @@
         <div id="formPopulate" class="visibleForm">
             <form class="row g-3" id="userInput">
                 <div class="col-12" id="testPlace">
-                    <!--        <div class="col-12">-->
                     <label for="userTitle" class="form-label" style="color: white">Title</label>
                     <input type="text" class="form-control" id="userTitle">
                 </div>
@@ -75,6 +71,10 @@
                     <input type="text" class="form-control" id="userRating" placeholder="">
                 </div>
                 <div class="col-12">
+                    <label for="userUrl" class="form-label" style="color: white">URL</label>
+                    <input type="text" class="form-control" id="userUrl">
+                </div>
+                <div class="col-12">
                     <button type="submit" id="edit-button" class="btn btn-primary edit-button">Edit</button>
                 </div>
             </form>
@@ -83,7 +83,7 @@
 
     <!-------------------input form for adding a movie---------------------->
 
-    <div class="card col-12 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2" id="addMovie">
+    <div class="card col-6 col-sm-6 col-lg-6 col-xl-6 col-xxl-6 mx-auto mt-2">
         <div class="card-header" style="color: white">
             Add a movie
         </div>
@@ -92,18 +92,18 @@
                 <button class="input-group-text" id="add-movie-button">Add</button>
                 <input type="text" class="form-control" placeholder="Add movie title" id="add-title"/>
                 <input type="text" class="form-control" placeholder="Add movie rating" id="add-rating"/>
+                <input type="text" class="form-control" placeholder="Add movie poster url" id="add-url"/>
             </div>
         </div>
     </div>
-</section>
 
-<!-------------------Movie Card---------------------->
+    <!-------------------Movie Card---------------------->
 
-<div id="tmdbCard"></div>
-<div id="movieCard"></div>
+    <div id="tmdbCard"></div>
+    <div id="movieCard"></div>
 
-<script SRC="js/keys.js"></script>
-<script src="/js/movies-project.js"></script>
-<script src="/js/tmdb-project.js"></script>
+    <script SRC="js/keys.js"></script>
+    <script src="/js/movies-project.js"></script>
+    <script src="/js/tmdb-project.js"></script>
 </body>
 </html>
