@@ -1,13 +1,15 @@
 "use strict";
-
-const tmdbUrl = `https://api.themoviedb.org/3/`
+//http://localhost:8080
+// const tmdbUrl = `https://api.themoviedb.org/3/`
+const tmdbUrl = `http://localhost:8080/api/movies/all`
 let lastSearchResults = [];
 
 function getWrecked() {
     function tmdbArray() {
         document.getElementById("search-movie").addEventListener('click', function () {
             let userSearch = document.getElementById("search-title").value;
-            let movietmdbUrl = "".concat(tmdbUrl, `search/movie?api_key=${TMDB_KEY}&language=en-US&query=`, userSearch);
+            // let movietmdbUrl = "".concat(tmdbUrl, `search/movie?api_key=${TMDB_KEY}&language=en-US&query=`, userSearch);
+            let movietmdbUrl = "".concat(tmdbUrl, userSearch);0
 
             //displayLoader();
             fetch(movietmdbUrl)

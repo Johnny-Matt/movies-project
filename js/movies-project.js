@@ -2,7 +2,8 @@
 
 // Website to Help https://javascript.plainenglish.io/adding-loader-to-your-deployed-projects-d8f389e8c928
 
-const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
+// const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
+const movieUrl = "http://localhost:8080/api/movies/all"
 
 function loadSpinner () {
     const loader = document.querySelector('.asteroid-preloader');
@@ -120,7 +121,7 @@ $(document).ready(function () {
                         document.getElementById('userTitle').value = movie.title;
                         document.getElementById('userDirector').value = movie.director;
                         document.getElementById('userGenre').value = movie.genre;
-                        document.getElementById('userActor').value = movie.actors;
+                        document.getElementById('userActor').value = movie.actor;
                         document.getElementById('userRating').value = movie.rating;
                         document.getElementById('userUrl').value = movie.url;
                     }
@@ -149,7 +150,7 @@ $(document).ready(function () {
                         <p style="color: white">Genre:</p>
                         <p><b style="color: #EA9215">${movie.genre}</b></p>
                         <p style="color: white">Actors:</p>
-                        <p><b style="color: #EA9215">${movie.actors}</b></p>
+                        <p><b style="color: #EA9215">${movie.actor}</b></p>
                         <p style="color: white">Rating:</p>
                         <p><b style="color: #EA9215">${movie.rating}</b></p>
                         <button type="button" class="delete-button btn-outline-danger">Delete</button>
@@ -218,7 +219,7 @@ $(document).ready(function () {
     //-------------------------------Edit Movie-----------------------------
     //------Event Listener to show form on dropdown click-------
     let toggleBtn = document.getElementById("dropItLikeItsHot")
-    console.log(toggleBtn);
+    // console.log(toggleBtn);
 
     toggleBtn.addEventListener("click", function () {
 
