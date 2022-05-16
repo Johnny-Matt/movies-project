@@ -4,6 +4,7 @@
 
 // const movieUrl = "https://grey-yellow-bonnet.glitch.me/movies"
 const movieUrl = "http://localhost:8080/api/movies/all"
+const postMovieUrl = "http://localhost:8080/api/movies"
 
 function loadSpinner () {
     const loader = document.querySelector('.asteroid-preloader');
@@ -173,22 +174,38 @@ $(document).ready(function () {
     document.getElementById("add-movie-button").addEventListener('click', function () {
         addMovie();
         let movieTitleReset = document.getElementById("add-title");
+        let movieDirectorReset = document.getElementById("add-director").value
+        let movieYearReset = document.getElementById("add-year").value
+        let moviePlotReset = document.getElementById("add-plot").value
+        let movieGenreReset = document.getElementById("add-genre").value
+        // let movieActorReset = document.getElementById("add-add-actor").value
         let movieRatingReset = document.getElementById("add-rating");
-        let movieUrlReset = document.getElementById("add-url");
+        // let movieUrlReset = document.getElementById("add-url");
 
         //--------This clears input fields after submit---------
         movieTitleReset.value = "";
+        movieDirectorReset.value = "";
+        movieYearReset.value = "";
+        moviePlotReset.value = "";
+        movieGenreReset.value = "";
+        // movieActorReset.value = "";
         movieRatingReset.value = "";
-        movieUrlReset.value = "";
+        // movieUrlReset.value = "";
     })
 
     // ----------------------Add A Movie Function-----------------------------------
+    //5/16/2022 ------ADDED USER INPUTS FOR DIRECTOR, YEAR, GENRE, AND PLOT.
     function addMovie() {
         let movieTitle = document.getElementById("add-title").value
+        let movieDirector = document.getElementById("add-director").value
+        let movieYear = document.getElementById("add-year").value
+        let moviePlot = document.getElementById("add-plot").value
+        let movieGenre = document.getElementById("add-genre").value
+        // let movieActor = document.getElementById("add-add-actor").value
         let movieRating = document.getElementById("add-rating").value
-        let moviePosterUrl = document.getElementById("add-url").value
+        // let moviePosterUrl = document.getElementById("add-url").value
 
-        let movie = {title: movieTitle, rating: movieRating, url: moviePosterUrl};
+        let movie = {title: movieTitle, director: movieDirector, year:movieYear, plot:moviePlot, genre:movieGenre, /*actor:movieActor,*/ rating: movieRating, /*url: moviePosterUrl*/};
         let options = {
             method: 'POST',
             headers: {
@@ -197,7 +214,7 @@ $(document).ready(function () {
             body: JSON.stringify(movie),
         };
         console.log(movie)
-        fetch(movieUrl, options)
+        fetch(postMovieUrl, options)
             .then(response => console.log(response))
             .then(() => movieArray())
             .catch(error => console.log('Movie not added ', error))
